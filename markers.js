@@ -4,9 +4,9 @@ const locations = {
     ],
     
     "Thursday, December 12": [
-        { name: "Rockefeller Center", coords: [-73.9787, 40.7587], color: "green" },
+        { name: "Rockefeller Center", coords: [-73.9792494, 40.7582163], color: "green" },
         { name: "Rockefeller Christmas Tree", coords: [-73.9787, 40.7587], color: "green" },
-        { name: "Rockefeller Skating Rink", coords: [-73.9787, 40.7587], color: "green" },
+        { name: "Rockefeller Skating Rink", coords: [-73.978798, 40.758678], color: "green" },
         { name: "Saks Fifth Avenue", coords: [-73.9742, 40.7602], color: "green" },
         { name: "Central Park", coords: [-73.9683, 40.7851], color: "green" }
     ],
