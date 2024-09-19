@@ -213,3 +213,14 @@ document.querySelectorAll('.map-overlay-inner input[type="checkbox"]').forEach(c
         map.setConfigProperty('basemap', this.id, this.checked);
     });
 });
+
+function setMapHeight() {
+    const mapElement = document.getElementById('map');
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+    mapElement.style.height = `calc(var(--vh, 1vh) * 100)`;
+}
+
+// Set map height on page load and resize
+window.addEventListener('load', setMapHeight);
+window.addEventListener('resize', setMapHeight);
