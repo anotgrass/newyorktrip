@@ -4,5 +4,6 @@ body {
 }
 #map {
     width: 100%;
-    height: 100%; /* Allow JS to set height dynamically */
+    height: 100vh; /* Default height to be the full viewport height */
+    position: relative; /* Ensures it fills its container */
 }
