@@ -176,8 +176,8 @@ body { margin: 0; padding: 0; }
     background-color: #4264fb;
     color: white;
     border-radius: 50%;
-    width: 25.5px; /* Reduced by 15% from 30px */
-    height: 25.5px; /* Reduced by 15% from 30px */
+    width: 20.0px; /* Reduced by 15% from 30px */
+    height: 20.0px; /* Reduced by 15% from 30px */
     display: flex;
     justify-content: center;
     align-items: center;
