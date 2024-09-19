@@ -1,0 +1,98 @@
+/* Style for options menu button, shrunk by 50%, with border and shadow */
+.options-menu-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: white;
+    border: 1px solid black;
+    padding: 5px;
+    cursor: pointer;
+    z-index: 2;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+/* Options menu icon lines, shrunk by 50% */
+.options-menu-btn span {
+    display: block;
+    width: 12.5px;
+    height: 1.5px;
+    margin: 2.5px 0;
+    background-color: black;
+}
+
+/* Hidden configuration panel by default */
+.config-panel {
+    position: absolute;
+    top: 50px;
+    left: 10px;
+    background: white;
+    z-index: 1;
+    border-radius: 4px;
+    padding: 15px;
+    font-family: 'Arial', sans-serif;
+    width: 280px;
+    max-width: 40vw;
+    display: none;
+    box-shadow: none;
+}
+
+/* Media query for tablet and mobile screens */
+@media (max-width: 768px) {
+    .config-panel {
+        width: 60vw;
+        left: 10px;
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .config-panel {
+        width: 75vw;
+        left: 10px;
+        font-size: 12px;
+        padding: 8px;
+    }
+}
+
+/* Styles for the form inside the panel */
+.map-overlay-inner fieldset {
+    display: block;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    border: none;
+    padding: 0;
+}
+
+.map-overlay-inner label {
+    font-weight: normal;
+    margin-right: 10px;
+}
+
+.map-overlay-inner input[type="checkbox"] {
+    margin: 0;
+    width: auto;
+}
+
+.select-fieldset,
+.fieldset-style {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.select-fieldset label,
+.fieldset-style label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Style adjustments for dropdowns */
+.select-fieldset select,
+.fieldset-style select {
+    width: auto;
+    box-sizing: border-box;
+    padding: 5px;
+}
