@@ -87,6 +87,55 @@ function offsetCoordinates(coords, index, totalMarkers) {
     return [coords[0] + offsetLng, coords[1] + offsetLat];
 }
 
+// Track the current light preset selection
+let currentLightPreset = 'auto';
+
+// Set light preset based on real time or manual selection
+function setAutoLightPreset() {
+    const hour = new Date().getHours();
+    let preset = 'day';
+    if (hour >= 5 && hour < 8) {
+        preset = 'dawn';
+    } else if (hour >= 8 && hour < 18) {
+        preset = 'day';
+    } else if (hour >= 18 && hour < 20) {
+        preset = 'dusk';
+    } else {
+        preset = 'night';
+    }
+    currentLightPreset = preset;
+    map.setConfigProperty('basemap', 'lightPreset', preset);
+}
+
+// Apply the selected light preset manually
+function applyLightPreset(preset) {
+    currentLightPreset = preset;
+    if (preset === 'auto') {
+        setAutoLightPreset();
+    } else {
+        map.setConfigProperty('basemap', 'lightPreset', preset);
+    }
+}
+
+// Event listener for style changes
+document.getElementById('styleSelect').addEventListener('change', function () {
+    const selectedStyle = this.value;
+    map.setStyle(selectedStyle);
+
+    // Reapply the light preset if the selected style is standard or standard satellite
+    map.on('style.load', () => {
+        if (selectedStyle === 'mapbox://styles/mapbox/standard' || selectedStyle === 'mapbox://styles/mapbox/standard-satellite') {
+            applyLightPreset(currentLightPreset); // Reapply the light preset
+        }
+    });
+});
+
+// Event listener for light preset changes
+document.getElementById('lightPreset').addEventListener('change', function () {
+    const selectedPreset = this.value;
+    applyLightPreset(selectedPreset);
+});
+
 // Remove the call to center on user location during map load
 map.on('load', function () {
 
@@ -146,37 +195,6 @@ function toggleConfigPanel() {
     const configPanel = document.querySelector('.config-panel');
     configPanel.style.display = (configPanel.style.display === 'none' || configPanel.style.display === '') ? 'block' : 'none';
 }
-
-// Set light preset based on real time
-function setAutoLightPreset() {
-    const hour = new Date().getHours();
-    let preset = 'day';
-    if (hour >= 5 && hour < 8) {
-        preset = 'dawn';
-    } else if (hour >= 8 && hour < 18) {
-        preset = 'day';
-    } else if (hour >= 18 && hour < 20) {
-        preset = 'dusk';
-    } else {
-        preset = 'night';
-    }
-    map.setConfigProperty('basemap', 'lightPreset', preset);
-}
-
-// Event listener for light preset changes
-document.getElementById('lightPreset').addEventListener('change', function () {
-    const selectedPreset = this.value;
-    if (selectedPreset === 'auto') {
-        setAutoLightPreset();
-    } else {
-        map.setConfigProperty('basemap', 'lightPreset', selectedPreset);
-    }
-});
-
-// Event listener for style changes
-document.getElementById('styleSelect').addEventListener('change', function () {
-    map.setStyle(this.value);
-});
 
 // Event listeners for label toggles
 document.querySelectorAll('.map-overlay-inner input[type="checkbox"]').forEach(checkbox => {
