@@ -217,7 +217,12 @@ document.querySelectorAll('.map-overlay-inner input[type="checkbox"]').forEach(c
 function setMapHeight() {
     const mapElement = document.getElementById('map');
     const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+    // Adjust for browser inconsistencies
     mapElement.style.height = `${viewportHeight}px`;
+
+    // Ensure the Mapbox map resizes correctly
+    map.resize();
 }
 
 // Set map height on page load, resize, and orientation change
