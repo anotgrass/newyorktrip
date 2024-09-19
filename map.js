@@ -1,6 +1,6 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiYW5vdGdyYXNzIiwiYSI6ImNtMTdjbGg4eTBzcm0yd3B4d3JpZHl4ejIifQ.h3LZQlV7dGoQ-qKNPCLjTA';
 
-// Define the default zoom level and settings
+// Define the default zoom level
 const defaultCenter = [-74.0060, 40.7128]; // New York City coordinates
 const defaultZoom = 12;
 const defaultPitch = 60;
@@ -78,8 +78,10 @@ map.addControl(
     'top-right'
 );
 
-// Add 3D buildings layer
+// Remove the call to center on user location during map load
 map.on('load', function () {
+
+    // Add the 3D buildings layer
     map.addLayer({
         'id': '3d-buildings',
         'source': 'composite',
@@ -103,32 +105,23 @@ map.on('load', function () {
         }
     });
 
-    // Add markers to the map
+    // Add markers with numbering and color
     Object.keys(locations).forEach(day => {
-        let markerCount = 1; // Reset marker count for each day
-
+        let count = 1;
         locations[day].forEach(location => {
-            // Create a numbered marker element
+            // Create the marker element
             const el = document.createElement('div');
             el.className = 'numbered-marker';
-            el.textContent = markerCount; // Add number to the marker
+            el.style.backgroundColor = location.color; // Set the marker color dynamically
+            el.innerText = count; // Add numbering
 
-            // Create the marker and add it to the map
-            const marker = new mapboxgl.Marker(el)
+            // Create the marker
+            new mapboxgl.Marker(el)
                 .setLngLat(location.coords)
                 .setPopup(new mapboxgl.Popup().setHTML(`<b>${location.name}</b><br>${day}`))
                 .addTo(map);
-
-            marker.getElement().addEventListener('click', () => {
-                map.flyTo({
-                    center: location.coords,
-                    zoom: 15, // Zoom closer to the marker
-                    essential: true
-                });
-                marker.togglePopup(); // Open the popup for the clicked marker
-            });
-
-            markerCount++; // Increment marker count for each location
+            
+            count++;
         });
     });
 
@@ -142,7 +135,7 @@ function toggleConfigPanel() {
     configPanel.style.display = (configPanel.style.display === 'none' || configPanel.style.display === '') ? 'block' : 'none';
 }
 
-// Set light preset based on real-time
+// Set light preset based on real time
 function setAutoLightPreset() {
     const hour = new Date().getHours();
     let preset = 'day';
