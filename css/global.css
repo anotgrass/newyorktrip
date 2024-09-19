@@ -1,7 +1,6 @@
 body { 
     margin: 0; 
     padding: 0; 
-    height: 100%; /* Ensures body takes full screen */
 }
 #map { 
     width: 100%; 
