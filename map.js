@@ -93,13 +93,13 @@ function createFontAwesomeMarker(iconClass, size = [30, 30], color = '#4264fb') 
     el.className = 'fa-marker'; // Custom class for styling
     el.style.fontSize = `${size[0]}px`;
     el.style.color = color;
-    el.style.width = `${size[0]}px`;
-    el.style.height = `${size[1]}px`;
+    el.style.display = 'flex'; // Ensure icon is centered
+    el.style.alignItems = 'center';
+    el.style.justifyContent = 'center';
     el.innerHTML = `<i class="${iconClass}"></i>`;
     return el;
 }
 
-// Remove the call to center on user location during map load
 map.on('load', function () {
 
     // Add the 3D buildings layer
