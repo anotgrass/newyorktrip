@@ -78,17 +78,6 @@ map.addControl(
     'top-right'
 );
 
-// Function to adjust marker offsets based on zoom level
-function getMarkerOffset(zoom) {
-    if (zoom >= 15) {
-        return [0, 0]; // No offset when zoomed in closer
-    } else if (zoom >= 12) {
-        return [10, -10]; // Slight offset at mid-zoom levels
-    } else {
-        return [20, -20]; // Larger offset when zoomed out farther
-    }
-}
-
 // Add markers and numbered markers for each day
 Object.keys(locations).forEach(day => {
     locations[day].forEach((location, index) => {
@@ -97,19 +86,11 @@ Object.keys(locations).forEach(day => {
         markerEl.className = 'numbered-marker';
         markerEl.textContent = index + 1; // Number the markers for each day
 
-        // Create the marker and apply initial offset based on the current zoom level
-        const marker = new mapboxgl.Marker(markerEl)
+        // Create the marker and add it to the map
+        new mapboxgl.Marker(markerEl)
             .setLngLat(location.coords)
             .setPopup(new mapboxgl.Popup().setHTML(`<b>${location.name}</b><br>${day}`))
             .addTo(map);
-
-        // Set the initial marker offset
-        marker.setOffset(getMarkerOffset(map.getZoom()));
-
-        // Update the marker offset dynamically as the zoom changes
-        map.on('zoom', () => {
-            marker.setOffset(getMarkerOffset(map.getZoom()));
-        });
     });
 });
 
