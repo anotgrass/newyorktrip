@@ -4,5 +4,5 @@ body {
 }
 #map {
     width: 100%;
-    height: calc(var(--vh, 1vh) * 100); /* Use the dynamically calculated height */
+    height: 100%; /* Allow JS to set height dynamically */
 }
