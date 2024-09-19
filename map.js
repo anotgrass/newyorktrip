@@ -87,54 +87,17 @@ function offsetCoordinates(coords, index, totalMarkers) {
     return [coords[0] + offsetLng, coords[1] + offsetLat];
 }
 
-// Track the current light preset selection
-let currentLightPreset = 'auto';
-
-// Set light preset based on real time or manual selection
-function setAutoLightPreset() {
-    const hour = new Date().getHours();
-    let preset = 'day';
-    if (hour >= 5 && hour < 8) {
-        preset = 'dawn';
-    } else if (hour >= 8 && hour < 18) {
-        preset = 'day';
-    } else if (hour >= 18 && hour < 20) {
-        preset = 'dusk';
-    } else {
-        preset = 'night';
-    }
-    currentLightPreset = preset;
-    map.setConfigProperty('basemap', 'lightPreset', preset);
+// Function to create Font Awesome icon markers for specific locations
+function createFontAwesomeMarker(iconClass, size = [30, 30], color = '#4264fb') {
+    const el = document.createElement('div');
+    el.className = 'fa-marker'; // Custom class for styling
+    el.style.fontSize = '24px';
+    el.style.color = color;
+    el.style.width = `${size[0]}px`;
+    el.style.height = `${size[1]}px`;
+    el.innerHTML = `<i class="${iconClass}"></i>`;
+    return el;
 }
-
-// Apply the selected light preset manually
-function applyLightPreset(preset) {
-    currentLightPreset = preset;
-    if (preset === 'auto') {
-        setAutoLightPreset();
-    } else {
-        map.setConfigProperty('basemap', 'lightPreset', preset);
-    }
-}
-
-// Event listener for style changes
-document.getElementById('styleSelect').addEventListener('change', function () {
-    const selectedStyle = this.value;
-    map.setStyle(selectedStyle);
-
-    // Reapply the light preset if the selected style is standard or standard satellite
-    map.on('style.load', () => {
-        if (selectedStyle === 'mapbox://styles/mapbox/standard' || selectedStyle === 'mapbox://styles/mapbox/standard-satellite') {
-            applyLightPreset(currentLightPreset); // Reapply the light preset
-        }
-    });
-});
-
-// Event listener for light preset changes
-document.getElementById('lightPreset').addEventListener('change', function () {
-    const selectedPreset = this.value;
-    applyLightPreset(selectedPreset);
-});
 
 // Remove the call to center on user location during map load
 map.on('load', function () {
@@ -163,18 +126,27 @@ map.on('load', function () {
         }
     });
 
-    // Add markers with numbering, color, and offset for overlapping markers
+    // Add markers with numbering, color, and Font Awesome icons for specific markers
     Object.keys(locations).forEach(day => {
         let count = 1;
         locations[day].forEach((location, index, array) => {
             // Offset coordinates if there are multiple markers
             const adjustedCoords = offsetCoordinates(location.coords, index, array.length);
 
-            // Create the marker element
-            const el = document.createElement('div');
-            el.className = 'numbered-marker';
-            el.style.backgroundColor = location.color; // Set the marker color dynamically
-            el.innerText = count; // Add numbering
+            let el;
+
+            // Use Font Awesome icons for specific locations
+            if (location.name === 'West New York') {
+                el = createFontAwesomeMarker('fas fa-home'); // House icon
+            } else if (location.name === 'LGA Airport') {
+                el = createFontAwesomeMarker('fas fa-plane'); // Airplane icon
+            } else {
+                // Default marker
+                el = document.createElement('div');
+                el.className = 'numbered-marker';
+                el.style.backgroundColor = location.color; // Set the marker color dynamically
+                el.innerText = count; // Add numbering
+            }
 
             // Create the marker
             new mapboxgl.Marker(el)
@@ -195,6 +167,45 @@ function toggleConfigPanel() {
     const configPanel = document.querySelector('.config-panel');
     configPanel.style.display = (configPanel.style.display === 'none' || configPanel.style.display === '') ? 'block' : 'none';
 }
+
+// Set light preset based on real time
+function setAutoLightPreset() {
+    const hour = new Date().getHours();
+    let preset = 'day';
+    if (hour >= 5 && hour < 8) {
+        preset = 'dawn';
+    } else if (hour >= 8 && hour < 18) {
+        preset = 'day';
+    } else if (hour >= 18 && hour < 20) {
+        preset = 'dusk';
+    } else {
+        preset = 'night';
+    }
+    map.setConfigProperty('basemap', 'lightPreset', preset);
+}
+
+// Event listener for light preset changes
+document.getElementById('lightPreset').addEventListener('change', function () {
+    const selectedPreset = this.value;
+    if (selectedPreset === 'auto') {
+        setAutoLightPreset();
+    } else {
+        map.setConfigProperty('basemap', 'lightPreset', selectedPreset);
+    }
+});
+
+// Event listener for style changes
+document.getElementById('styleSelect').addEventListener('change', function () {
+    const selectedStyle = this.value;
+    map.setStyle(selectedStyle);
+
+    // Reapply the light preset if the selected style is standard or standard satellite
+    map.on('style.load', () => {
+        if (selectedStyle === 'mapbox://styles/mapbox/standard' || selectedStyle === 'mapbox://styles/mapbox/standard-satellite') {
+            applyLightPreset(currentLightPreset); // Reapply the light preset
+        }
+    });
+});
 
 // Event listeners for label toggles
 document.querySelectorAll('.map-overlay-inner input[type="checkbox"]').forEach(checkbox => {
