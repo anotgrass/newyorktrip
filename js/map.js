@@ -16,6 +16,14 @@ const map = new mapboxgl.Map({
     bearing: defaultBearing
 });
 
+// Variable to store the previous map state before zooming in
+let previousMapState = {
+    center: defaultCenter,
+    zoom: defaultZoom,
+    pitch: defaultPitch,
+    bearing: defaultBearing
+};
+
 // Custom control for resetting the map to default view
 class ResetViewControl {
     onAdd(map) {
@@ -105,21 +113,54 @@ map.on('load', function () {
         }
     });
 
-    // Add markers with numbering, color, and offset for overlapping markers
+    // Add markers with zoom functionality
     Object.keys(locations).forEach(day => {
         let count = 1;
-        locations[day].forEach((location, index, array) => {
-            // Create the marker element
+        locations[day].forEach(location => {
             const el = document.createElement('div');
             el.className = 'numbered-marker';
-            el.style.backgroundColor = location.color; // Set the marker color dynamically
-            el.innerText = count; // Add numbering
+            el.style.backgroundColor = location.color;
+            el.innerText = count;
+
+            // Create a popup for the marker
+            const popup = new mapboxgl.Popup({ closeOnClick: true })
+                .setHTML(`<b>${location.name}</b><br>${day}`);
 
             // Create the marker
-            new mapboxgl.Marker(el)
+            const marker = new mapboxgl.Marker(el)
                 .setLngLat(location.coords)
-                .setPopup(new mapboxgl.Popup().setHTML(`<b>${location.name}</b><br>${day}`))
+                .setPopup(popup)
                 .addTo(map);
+
+            // Zoom into the location when a marker is clicked
+            marker.getElement().addEventListener('click', () => {
+                // Save the current map state before zooming in
+                previousMapState = {
+                    center: map.getCenter(),
+                    zoom: map.getZoom(),
+                    pitch: map.getPitch(),
+                    bearing: map.getBearing()
+                };
+
+                map.flyTo({
+                    center: location.coords,
+                    zoom: 15,
+                    pitch: 45,
+                    bearing: 0,
+                    essential: true
+                });
+            });
+
+            // When the popup closes, return to the previous map state
+            popup.on('close', () => {
+                map.flyTo({
+                    center: previousMapState.center,
+                    zoom: previousMapState.zoom,
+                    pitch: previousMapState.pitch,
+                    bearing: previousMapState.bearing,
+                    essential: true
+                });
+            });
 
             count++;
         });

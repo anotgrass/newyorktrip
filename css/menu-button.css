@@ -1,0 +1,21 @@
+/* Style for the menu button */
+.options-menu-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: white;
+    border: 1px solid black;
+    padding: 5px;
+    cursor: pointer;
+    z-index: 2;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+.options-menu-btn span {
+    display: block;
+    width: 12.5px;
+    height: 1.5px;
+    margin: 2.5px 0;
+    background-color: black;
+}
