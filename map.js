@@ -1,12 +1,10 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiYW5vdGdyYXNzIiwiYSI6ImNtMTdjbGg4eTBzcm0yd3B4d3JpZHl4ejIifQ.h3LZQlV7dGoQ-qKNPCLjTA';
 
 // Define the default zoom level
-const defaultCenter = [-73.998327,40.764584]; // New York City coordinates
-const defaultZoom = 13;
+const defaultCenter = [-74.0060, 40.7128]; // New York City coordinates
+const defaultZoom = 12;
 const defaultPitch = 60;
-const defaultBearing = 160;
-
-let previousExtent = {}; // Store the previous extent
+const defaultBearing = -17.6;
 
 // Initialize the map
 const map = new mapboxgl.Map({
@@ -80,64 +78,7 @@ map.addControl(
     'top-right'
 );
 
-// Function to store the current map extent
-function saveCurrentExtent() {
-    previousExtent = {
-        center: map.getCenter(),
-        zoom: map.getZoom(),
-        pitch: map.getPitch(),
-        bearing: map.getBearing()
-    };
-}
-
-// Function to restore the previous map extent
-function restorePreviousExtent() {
-    if (previousExtent.center) {
-        map.flyTo({
-            center: previousExtent.center,
-            zoom: previousExtent.zoom,
-            pitch: previousExtent.pitch,
-            bearing: previousExtent.bearing,
-            essential: true
-        });
-    }
-}
-
-// Center the map on the user's location or the default center when the map loads
-map.on('load', function () {
-    // Center the map based on the user's location if possible
-    centerMapOnUserLocation(map, defaultCenter);
-
-    // Add markers and fly to their coordinates when clicked
-    Object.keys(locations).forEach(day => {
-        locations[day].forEach(location => {
-            const marker = new mapboxgl.Marker({ color: location.color })
-                .setLngLat(location.coords)
-                .setPopup(new mapboxgl.Popup().setHTML(`<b>${location.name}</b><br>${day}`))
-                .addTo(map);
-
-            // Add click event listener to each marker
-            marker.getElement().addEventListener('click', () => {
-                // Save the current extent before flying to the marker
-                saveCurrentExtent();
-
-                map.flyTo({
-                    center: location.coords,
-                    zoom: 15, // Optionally adjust the zoom level when centering
-                    essential: true // This ensures the animation is smooth
-                });
-
-                // Add an event listener to the popup close button
-                marker.getPopup().on('close', restorePreviousExtent);
-            });
-        });
-    });
-
-    // Set default light preset
-    setAutoLightPreset();
-});
-
-// Function to center the map on the user's location if available
+// Function to center the map on the user's location (now triggered only by the geolocation button, not on map load)
 function centerMapOnUserLocation(map, defaultCenter) {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -155,6 +96,49 @@ function centerMapOnUserLocation(map, defaultCenter) {
         map.setZoom(defaultZoom); // Optionally, set the zoom level when centering on the default coordinates
     }
 }
+
+// Remove the call to center on user location during map load
+map.on('load', function () {
+    // Remove the call to center on user location automatically
+    // centerMapOnUserLocation(map, defaultCenter); <-- Commented out or removed
+
+    // Add the 3D buildings layer
+    map.addLayer({
+        'id': '3d-buildings',
+        'source': 'composite',
+        'source-layer': 'building',
+        'filter': ['==', 'extrude', 'true'],
+        'type': 'fill-extrusion',
+        'minzoom': 15,
+        'paint': {
+            'fill-extrusion-color': '#aaa',
+            'fill-extrusion-height': [
+                'interpolate', ['linear'], ['zoom'],
+                15, 0,
+                15.05, ['get', 'height']
+            ],
+            'fill-extrusion-base': [
+                'interpolate', ['linear'], ['zoom'],
+                15, 0,
+                15.05, ['get', 'min_height']
+            ],
+            'fill-extrusion-opacity': 0.6
+        }
+    });
+
+    // Add markers
+    Object.keys(locations).forEach(day => {
+        locations[day].forEach(location => {
+            new mapboxgl.Marker({ color: location.color })
+                .setLngLat(location.coords)
+                .setPopup(new mapboxgl.Popup().setHTML(`<b>${location.name}</b><br>${day}`))
+                .addTo(map);
+        });
+    });
+
+    // Set default light preset
+    setAutoLightPreset();
+});
 
 // Toggle config panel
 function toggleConfigPanel() {
