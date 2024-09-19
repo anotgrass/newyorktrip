@@ -87,11 +87,11 @@ function offsetCoordinates(coords, index, totalMarkers) {
     return [coords[0] + offsetLng, coords[1] + offsetLat];
 }
 
-// Function to create Font Awesome icon markers for specific locations
+// Function to create a Font Awesome marker with specified icon, size, and color
 function createFontAwesomeMarker(iconClass, size = [30, 30], color = '#4264fb') {
     const el = document.createElement('div');
     el.className = 'fa-marker'; // Custom class for styling
-    el.style.fontSize = '24px';
+    el.style.fontSize = `${size[0]}px`;
     el.style.color = color;
     el.style.width = `${size[0]}px`;
     el.style.height = `${size[1]}px`;
@@ -126,35 +126,41 @@ map.on('load', function () {
         }
     });
 
-    // Add markers with numbering, color, and Font Awesome icons for specific markers
+    // Add regular numbered markers
     Object.keys(locations).forEach(day => {
         let count = 1;
         locations[day].forEach((location, index, array) => {
             // Offset coordinates if there are multiple markers
             const adjustedCoords = offsetCoordinates(location.coords, index, array.length);
 
-            let el;
-
-            // Use Font Awesome icons for specific locations
-            if (location.name === 'West New York') {
-                el = createFontAwesomeMarker('fas fa-home'); // House icon
-            } else if (location.name === 'LGA Airport') {
-                el = createFontAwesomeMarker('fas fa-plane'); // Airplane icon
+            // Create the marker element
+            if (location.name === "West New York") {
+                const westNewYorkIcon = createFontAwesomeMarker('fa-solid fa-house', [30, 30], '#4264fb');
+                new mapboxgl.Marker(westNewYorkIcon)
+                    .setLngLat(location.coords)
+                    .setPopup(new mapboxgl.Popup().setHTML(`<b>${location.name}</b><br>${day}`))
+                    .addTo(map);
+            } else if (location.name === "LGA Airport") {
+                const lgaAirportIcon = createFontAwesomeMarker('fa-solid fa-plane', [30, 30], '#FFD700');
+                new mapboxgl.Marker(lgaAirportIcon)
+                    .setLngLat(location.coords)
+                    .setPopup(new mapboxgl.Popup().setHTML(`<b>${location.name}</b><br>${day}`))
+                    .addTo(map);
             } else {
-                // Default marker
-                el = document.createElement('div');
+                // Standard numbered markers
+                const el = document.createElement('div');
                 el.className = 'numbered-marker';
                 el.style.backgroundColor = location.color; // Set the marker color dynamically
                 el.innerText = count; // Add numbering
+
+                // Create the marker
+                new mapboxgl.Marker(el)
+                    .setLngLat(adjustedCoords)
+                    .setPopup(new mapboxgl.Popup().setHTML(`<b>${location.name}</b><br>${day}`))
+                    .addTo(map);
+
+                count++;
             }
-
-            // Create the marker
-            new mapboxgl.Marker(el)
-                .setLngLat(adjustedCoords)
-                .setPopup(new mapboxgl.Popup().setHTML(`<b>${location.name}</b><br>${day}`))
-                .addTo(map);
-
-            count++;
         });
     });
 
@@ -196,15 +202,7 @@ document.getElementById('lightPreset').addEventListener('change', function () {
 
 // Event listener for style changes
 document.getElementById('styleSelect').addEventListener('change', function () {
-    const selectedStyle = this.value;
-    map.setStyle(selectedStyle);
-
-    // Reapply the light preset if the selected style is standard or standard satellite
-    map.on('style.load', () => {
-        if (selectedStyle === 'mapbox://styles/mapbox/standard' || selectedStyle === 'mapbox://styles/mapbox/standard-satellite') {
-            applyLightPreset(currentLightPreset); // Reapply the light preset
-        }
-    });
+    map.setStyle(this.value);
 });
 
 // Event listeners for label toggles
