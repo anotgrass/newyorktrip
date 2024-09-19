@@ -78,28 +78,7 @@ map.addControl(
     'top-right'
 );
 
-// Function to offset markers if they are too close to each other
-function offsetCoordinates(coords, index, totalMarkers) {
-    const offsetFactor = 0.0001; // Adjust this value to change the offset size
-    const angle = (index / totalMarkers) * 2 * Math.PI;
-    const offsetLng = Math.cos(angle) * offsetFactor;
-    const offsetLat = Math.sin(angle) * offsetFactor;
-    return [coords[0] + offsetLng, coords[1] + offsetLat];
-}
-
-// Function to create a Font Awesome marker with specified icon, size, and color
-function createFontAwesomeMarker(iconClass, size = [30, 30], color = '#4264fb') {
-    const el = document.createElement('div');
-    el.className = 'fa-marker'; // Custom class for styling
-    el.style.fontSize = `${size[0]}px`;
-    el.style.color = color;
-    el.style.display = 'flex'; // Ensure icon is centered
-    el.style.alignItems = 'center';
-    el.style.justifyContent = 'center';
-    el.innerHTML = `<i class="${iconClass}"></i>`;
-    return el;
-}
-
+// Remove the call to center on user location during map load
 map.on('load', function () {
 
     // Add the 3D buildings layer
@@ -126,41 +105,23 @@ map.on('load', function () {
         }
     });
 
-    // Add regular numbered markers
+    // Add markers with numbering, color, and offset for overlapping markers
     Object.keys(locations).forEach(day => {
         let count = 1;
         locations[day].forEach((location, index, array) => {
-            // Offset coordinates if there are multiple markers
-            const adjustedCoords = offsetCoordinates(location.coords, index, array.length);
-
             // Create the marker element
-            if (location.name === "West New York") {
-                const westNewYorkIcon = createFontAwesomeMarker('fa-solid fa-house', [30, 30], '#4264fb');
-                new mapboxgl.Marker(westNewYorkIcon)
-                    .setLngLat(location.coords)
-                    .setPopup(new mapboxgl.Popup().setHTML(`<b>${location.name}</b><br>${day}`))
-                    .addTo(map);
-            } else if (location.name === "LGA Airport") {
-                const lgaAirportIcon = createFontAwesomeMarker('fa-solid fa-plane', [30, 30], '#FFD700');
-                new mapboxgl.Marker(lgaAirportIcon)
-                    .setLngLat(location.coords)
-                    .setPopup(new mapboxgl.Popup().setHTML(`<b>${location.name}</b><br>${day}`))
-                    .addTo(map);
-            } else {
-                // Standard numbered markers
-                const el = document.createElement('div');
-                el.className = 'numbered-marker';
-                el.style.backgroundColor = location.color; // Set the marker color dynamically
-                el.innerText = count; // Add numbering
+            const el = document.createElement('div');
+            el.className = 'numbered-marker';
+            el.style.backgroundColor = location.color; // Set the marker color dynamically
+            el.innerText = count; // Add numbering
 
-                // Create the marker
-                new mapboxgl.Marker(el)
-                    .setLngLat(adjustedCoords)
-                    .setPopup(new mapboxgl.Popup().setHTML(`<b>${location.name}</b><br>${day}`))
-                    .addTo(map);
+            // Create the marker
+            new mapboxgl.Marker(el)
+                .setLngLat(location.coords)
+                .setPopup(new mapboxgl.Popup().setHTML(`<b>${location.name}</b><br>${day}`))
+                .addTo(map);
 
-                count++;
-            }
+            count++;
         });
     });
 
