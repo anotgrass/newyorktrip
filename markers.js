@@ -8,7 +8,7 @@ const locations = {
         { name: "Chinatown", coords: [-73.9970, 40.7158], color: "green" },
         { name: "Little Italy", coords: [-73.9973, 40.7191], color: "green" },
         { name: "Brooklyn Bridge", coords: [-73.9969, 40.7061], color: "green" },
-        { name: "Broadway Theatre", coords: [-73.9851, 40.7590], color: "green" },
+        { name: "Marquis Theatre (Elf)", coords: [-73.9864, 40.7590], color: "green" },
         { name: "Rockefeller Christmas Tree", coords: [-73.9787, 40.7587], color: "green" },
         { name: "Rockefeller Skating Rink", coords: [-73.9787, 40.7587], color: "green" }
     ],

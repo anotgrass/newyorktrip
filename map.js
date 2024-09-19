@@ -78,29 +78,8 @@ map.addControl(
     'top-right'
 );
 
-// Function to center the map on the user's location (now triggered only by the geolocation button, not on map load)
-function centerMapOnUserLocation(map, defaultCenter) {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            const userCoords = [position.coords.longitude, position.coords.latitude];
-            map.setCenter(userCoords);
-            map.setZoom(defaultZoom); // Optionally, set the zoom level when centering on the user's location
-        }, function (error) {
-            console.error('Error getting user location:', error);
-            map.setCenter(defaultCenter); // Center on the default coordinates if user location is not available
-            map.setZoom(defaultZoom); // Optionally, set the zoom level when centering on the default coordinates
-        });
-    } else {
-        console.log('Geolocation is not supported.');
-        map.setCenter(defaultCenter); // Center on the default coordinates if geolocation is not supported
-        map.setZoom(defaultZoom); // Optionally, set the zoom level when centering on the default coordinates
-    }
-}
-
 // Remove the call to center on user location during map load
 map.on('load', function () {
-    // Remove the call to center on user location automatically
-    // centerMapOnUserLocation(map, defaultCenter); <-- Commented out or removed
 
     // Add the 3D buildings layer
     map.addLayer({
