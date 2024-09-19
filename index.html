@@ -1,160 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>NYC Trip Map with 3D Buildings and Style Switcher</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet" />
-    <style>
-        body { margin: 0; padding: 0; }
-        #map { width: 100%; height: 100vh; }
-        .style-switcher {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: white;
-            z-index: 1;
-            border-radius: 4px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-            padding: 5px;
-            font-family: 'Arial', sans-serif;
-        }
-    </style>
+    <title>NYC Travel Guide</title
+        >
+    <script src='https://api.mapbox.com/mapbox-gl-js/v3.6.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v3.6.0/mapbox-gl.css' rel='stylesheet' />
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS -->
+    <script src="markers.js"></script>
 </head>
 <body>
     <div id="map"></div>
-    <div class="style-switcher">
-        <label for="styleSelect">Map Style: </label>
-        <select id="styleSelect" onchange="switchStyle(this.value)">
-            <option value="mapbox://styles/mapbox/streets-v11">Streets</option>
-            <option value="mapbox://styles/mapbox/outdoors-v11">Outdoors</option>
-            <option value="mapbox://styles/mapbox/light-v10">Light</option>
-            <option value="mapbox://styles/mapbox/dark-v10">Dark</option>
-            <option value="mapbox://styles/mapbox/satellite-v9">Satellite</option>
-            <option value="mapbox://styles/mapbox/satellite-streets-v11" selected>Satellite with Labels</option>
-        </select>
+    
+    <!-- Hamburger Button -->
+    <button class="hamburger-btn" onclick="toggleConfigPanel()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    
+    <!-- Configuration Panel -->
+    <div class="config-panel">
+        <div class="map-overlay-inner">
+            <!-- Map Style fieldset -->
+            <fieldset class="fieldset-style">
+                <label for="styleSelect">Map Style:</label>
+                <select id="styleSelect">
+                    <option value="mapbox://styles/mapbox/standard">Standard</option>
+                    <option value="mapbox://styles/mapbox/standard-satellite">Standard Satellite</option>
+                    <option value="mapbox://styles/mapbox/outdoors-v11">Outdoors</option>
+                </select>
+            </fieldset>
+            
+            <!-- Light preset fieldset -->
+            <fieldset class="select-fieldset">
+                <label for="lightPreset">Select light preset</label>
+                <select id="lightPreset" name="lightPreset">
+                    <option value="auto" selected>Auto (based on time)</option>
+                    <option value="dawn">Dawn</option>
+                    <option value="day">Day</option>
+                    <option value="dusk">Dusk</option>
+                    <option value="night">Night</option>
+                </select>
+            </fieldset>
+
+            <!-- Remaining fieldsets for checkboxes -->
+            <fieldset>
+                <label for="showPlaceLabels">Show Place Labels</label>
+                <input type="checkbox" id="showPlaceLabels" checked>
+            </fieldset>
+            <fieldset>
+                <label for="showPOILabels">Show POI Labels</label>
+                <input type="checkbox" id="showPOILabels" checked>
+            </fieldset>
+            <fieldset>
+                <label for="showRoadLabels">Show Road Labels</label>
+                <input type="checkbox" id="showRoadLabels" checked>
+            </fieldset>
+            <fieldset>
+                <label for="showTransitLabels">Show Transit Labels</label>
+                <input type="checkbox" id="showTransitLabels" checked>
+            </fieldset>
+        </div>
     </div>
-    <script>
-        // Your Mapbox access token
-        mapboxgl.accessToken = 'pk.eyJ1IjoiYW5vdGdyYXNzIiwiYSI6ImNtMTdjbGg4eTBzcm0yd3B4d3JpZHl4ejIifQ.h3LZQlV7dGoQ-qKNPCLjTA';
 
-        // Create the map with the default style (satellite with labels)
-        const map = new mapboxgl.Map({
-            container: 'map', // container ID
-            style: 'mapbox://styles/mapbox/satellite-streets-v11', // default style
-            center: [-74.0060, 40.7128], // starting position [lng, lat]
-            zoom: 12, // starting zoom
-            pitch: 60, // pitch in degrees
-            bearing: -17.6 // bearing in degrees
-        });
-
-        // Add zoom and rotation controls to the map
-        map.addControl(new mapboxgl.NavigationControl());
-
-        // Add 3D buildings
-        map.on('load', function () {
-            map.addLayer({
-                'id': '3d-buildings',
-                'source': 'composite',
-                'source-layer': 'building',
-                'filter': ['==', 'extrude', 'true'],
-                'type': 'fill-extrusion',
-                'minzoom': 15,
-                'paint': {
-                    'fill-extrusion-color': '#aaa',
-                    'fill-extrusion-height': [
-                        'interpolate', ['linear'], ['zoom'],
-                        15, 0,
-                        15.05, ['get', 'height']
-                    ],
-                    'fill-extrusion-base': [
-                        'interpolate', ['linear'], ['zoom'],
-                        15, 0,
-                        15.05, ['get', 'min_height']
-                    ],
-                    'fill-extrusion-opacity': 0.6
-                }
-            });
-
-            // Add markers to the map
-            const locations = {
-                "Wednesday, December 11": [
-                    { name: "West New York", coords: [ -74.0143, 40.7870 ], color: "blue" }
-                ],
-                "Thursday, December 12": [
-                    { name: "Rockefeller Center", coords: [ -73.9787, 40.7587 ], color: "green" },
-                    { name: "Central Park", coords: [ -73.9683, 40.7851 ], color: "green" },
-                    { name: "Chinatown", coords: [ -73.9970, 40.7158 ], color: "green" },
-                    { name: "Little Italy", coords: [ -73.9973, 40.7191 ], color: "green" },
-                    { name: "Brooklyn Bridge", coords: [ -73.9969, 40.7061 ], color: "green" },
-                    { name: "Broadway Theatre", coords: [ -73.9851, 40.7590 ], color: "green" },
-                    { name: "Rockefeller Christmas Tree", coords: [ -73.9787, 40.7587 ], color: "green" },
-                    { name: "Rockefeller Skating Rink", coords: [ -73.9787, 40.7587 ], color: "green" }
-                ],
-                "Friday, December 13": [
-                    { name: "9/11 Memorial & Museum", coords: [ -74.0134, 40.7115 ], color: "red" },
-                    { name: "New York Public Library", coords: [ -73.9822, 40.7532 ], color: "red" },
-                    { name: "Bryant Park", coords: [ -73.9832, 40.7536 ], color: "red" },
-                    { name: "Empire State Building", coords: [ -73.9857, 40.7484 ], color: "red" },
-                    { name: "Times Square", coords: [ -73.9855, 40.7580 ], color: "red" },
-                    { name: "Grand Central Station", coords: [ -73.9772, 40.7527 ], color: "red" }
-                ],
-                "Saturday, December 14": [
-                    { name: "Liberty Island", coords: [ -74.0445, 40.6892 ], color: "purple" },
-                    { name: "Ellis Island", coords: [ -74.0403, 40.6995 ], color: "purple" },
-                    { name: "Chelsea Market", coords: [ -74.0061, 40.7425 ], color: "purple" },
-                    { name: "The High Line", coords: [ -74.0049, 40.7479 ], color: "purple" },
-                    { name: "Hudson Yards", coords: [ -74.0017, 40.7546 ], color: "purple" },
-                    { name: "The Edge Observatory", coords: [ -74.0011, 40.7535 ], color: "purple" }
-                ],
-                "Sunday, December 15": [
-                    { name: "Saks Fifth Avenue", coords: [ -73.9742, 40.7602 ], color: "orange" },
-                    { name: "Aire Ancient Baths", coords: [ -74.0022, 40.7174 ], color: "orange" },
-                    { name: "Macy's Herald Square", coords: [ -73.9890, 40.7508 ], color: "orange" }
-                ]
-            };
-
-            // Add markers to the map
-            Object.keys(locations).forEach(day => {
-                locations[day].forEach(location => {
-                    new mapboxgl.Marker({ color: location.color })
-                        .setLngLat(location.coords)
-                        .setPopup(new mapboxgl.Popup().setHTML(`<b>${location.name}</b><br>${day}`))
-                        .addTo(map);
-                });
-            });
-        });
-
-        // Function to switch map style
-        function switchStyle(style) {
-            map.setStyle(style);
-            map.on('style.load', function () {
-                // Re-add the 3D buildings layer after the style is changed
-                map.addLayer({
-                    'id': '3d-buildings',
-                    'source': 'composite',
-                    'source-layer': 'building',
-                    'filter': ['==', 'extrude', 'true'],
-                    'type': 'fill-extrusion',
-                    'minzoom': 15,
-                    'paint': {
-                        'fill-extrusion-color': '#aaa',
-                        'fill-extrusion-height': [
-                            'interpolate', ['linear'], ['zoom'],
-                            15, 0,
-                            15.05, ['get', 'height']
-                        ],
-                        'fill-extrusion-base': [
-                            'interpolate', ['linear'], ['zoom'],
-                            15, 0,
-                            15.05, ['get', 'min_height']
-                        ],
-                        'fill-extrusion-opacity': 0.6
-                    }
-                });
-            });
-        }
-    </script>
+    <script src="map.js" defer></script> <!-- Link to map.js -->
 </body>
 </html>

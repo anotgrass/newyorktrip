@@ -1,0 +1,104 @@
+body { margin: 0; padding: 0; }
+#map { width: 100%; height: 100vh; }
+
+/* Style for hamburger button, shrunk by 50%, with border and shadow */
+.hamburger-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: white;
+    border: 1px solid black; /* Add a small black border */
+    padding: 5px; /* Reduced padding for smaller button size */
+    cursor: pointer;
+    z-index: 2;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+    border-radius: 4px; /* Rounded corners */
+}
+
+/* Hamburger icon lines, shrunk by 50% */
+.hamburger-btn span {
+    display: block;
+    width: 12.5px; /* 50% of original width */
+    height: 1.5px; /* 50% of original height */
+    margin: 2.5px 0; /* 50% of original margin */
+    background-color: black;
+}
+
+/* Hidden configuration panel by default */
+.config-panel {
+    position: absolute;
+    top: 50px;
+    left: 10px;
+    background: white;
+    z-index: 1;
+    border-radius: 4px;
+    padding: 15px;
+    font-family: 'Arial', sans-serif;
+    width: 300px;
+    max-width: 90vw;
+    display: none; /* Initially hidden */
+    box-shadow: none; /* Remove shadow around the config panel */
+}
+
+/* Media query for tablet and mobile screens */
+@media (max-width: 768px) {
+    .config-panel {
+        width: 80vw; /* Adjust to 80% of viewport width for smaller screens */
+        left: 10vw; /* Center the panel horizontally */
+    }
+}
+
+@media (max-width: 480px) {
+    .config-panel {
+        width: 90vw; /* Make the panel take up more space on very small screens */
+        left: 5vw; /* Add padding to the sides */
+    }
+}
+
+.map-overlay-inner fieldset {
+    display: flexbox;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    border: none;
+    padding: 0;
+}
+
+.map-overlay-inner label {
+    font-weight: normal;
+    margin-right: 10px;
+}
+
+.map-overlay-inner input[type="checkbox"] {
+    margin: 0;
+    width: auto;
+}
+
+.select-fieldset {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.select-fieldset label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.fieldset-style label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Style adjustments for dropdowns */
+.select-fieldset select,
+.fieldset-style select {
+    width: 100%; /* Ensures dropdown fits within the container */
+    box-sizing: border-box;
+}
+
+.mapboxgl-ctrl-reset i {
+    font-size: 16px; /* Adjust this size as needed */
+    line-height: 24px; /* Adjust for vertical centering */
+}
