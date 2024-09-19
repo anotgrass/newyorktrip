@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
     <title>NYC Travel Guide</title>
-    
+
     <!-- Mapbox and third-party scripts and styles -->
     <script src='https://api.mapbox.com/mapbox-gl-js/v3.6.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v3.6.0/mapbox-gl.css' rel='stylesheet' />
-    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
-    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
+    <script
+        src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet"
+        href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css"
+        type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <link rel="stylesheet" href="./css/global.css">
 
 </head>
+
 <body>
-    <div id="map"></div>
-    
+    <div id="map-container">
+
+        <div id="map"></div>
+
+    </div>
+
     <!-- Menu Button -->
     <button class="options-menu-btn" onclick="toggleConfigPanel()">
         <span></span>
@@ -37,7 +47,7 @@
                     <option value="mapbox://styles/mapbox/outdoors-v11">Outdoors</option>
                 </select>
             </fieldset>
-            
+
             <!-- Light preset fieldset -->
             <fieldset class="select-fieldset">
                 <label for="lightPreset">Select light preset</label>
@@ -74,4 +84,5 @@
     <script src="./js/locations.js" defer></script>
     <script src="./js/map.js" defer></script>
 </body>
+
 </html>

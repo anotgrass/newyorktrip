@@ -4,10 +4,14 @@ html, body {
     padding: 0;
 }
 
-#map { 
-    width: 100%; 
-    height: 100vh; 
-    position: relative; /* Ensure it's positioned correctly within the body */
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+#map-container {
+    height: 100vh;
+    width: auto;
 }
 
 
