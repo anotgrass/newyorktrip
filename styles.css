@@ -102,3 +102,24 @@ body { margin: 0; padding: 0; }
     font-size: 16px; /* Adjust this size as needed */
     line-height: 24px; /* Adjust for vertical centering */
 }
+
+/* Default styling for geolocate control (for desktop) */
+.mapboxgl-ctrl-geolocate {
+    width: 40px;
+    height: 40px;
+}
+
+/* For smaller screens (tablets and mobiles), reduce the size */
+@media (max-width: 768px) {
+    .mapboxgl-ctrl-geolocate {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .mapboxgl-ctrl-geolocate {
+        width: 25px;
+        height: 25px;
+    }
+}
