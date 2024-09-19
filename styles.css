@@ -186,18 +186,3 @@ body { margin: 0; padding: 0; }
     text-align: center;
     border: 2px solid white;
 }
-
-./* Styling for Font Awesome markers */
-.fa-marker {
-    background-color: transparent; /* Ensure no background box */
-    width: 30px;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.fa-marker i {
-    font-size: 30px;
-    line-height: 30px; /* Ensures vertical centering of the icon */
-}
