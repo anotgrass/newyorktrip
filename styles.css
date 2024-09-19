@@ -173,14 +173,15 @@ body { margin: 0; padding: 0; }
 }
 
 .numbered-marker {
+    background-color: #4264fb;
     color: white;
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: 25.5px; /* Reduced by 15% from 30px */
+    height: 25.5px; /* Reduced by 15% from 30px */
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 14px;
+    font-size: 12px; /* Reduced by 15% from 14px */
     font-weight: bold;
     text-align: center;
     border: 2px solid white;
