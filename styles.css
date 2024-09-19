@@ -187,9 +187,17 @@ body { margin: 0; padding: 0; }
     border: 2px solid white;
 }
 
+./* Styling for Font Awesome markers */
 .fa-marker {
+    background-color: transparent; /* Ensure no background box */
+    width: 30px;
+    height: 30px;
     display: flex;
-    align-items: center;
     justify-content: center;
-    font-size: 24px; /* You can adjust the size here */
+    align-items: center;
+}
+
+.fa-marker i {
+    font-size: 30px;
+    line-height: 30px; /* Ensures vertical centering of the icon */
 }
