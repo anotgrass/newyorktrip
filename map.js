@@ -78,6 +78,15 @@ map.addControl(
     'top-right'
 );
 
+// Function to offset markers if they are too close to each other
+function offsetCoordinates(coords, index, totalMarkers) {
+    const offsetFactor = 0.0001; // Adjust this value to change the offset size
+    const angle = (index / totalMarkers) * 2 * Math.PI;
+    const offsetLng = Math.cos(angle) * offsetFactor;
+    const offsetLat = Math.sin(angle) * offsetFactor;
+    return [coords[0] + offsetLng, coords[1] + offsetLat];
+}
+
 // Remove the call to center on user location during map load
 map.on('load', function () {
 
@@ -105,10 +114,13 @@ map.on('load', function () {
         }
     });
 
-    // Add markers with numbering and color
+    // Add markers with numbering, color, and offset for overlapping markers
     Object.keys(locations).forEach(day => {
         let count = 1;
-        locations[day].forEach(location => {
+        locations[day].forEach((location, index, array) => {
+            // Offset coordinates if there are multiple markers
+            const adjustedCoords = offsetCoordinates(location.coords, index, array.length);
+
             // Create the marker element
             const el = document.createElement('div');
             el.className = 'numbered-marker';
@@ -117,10 +129,10 @@ map.on('load', function () {
 
             // Create the marker
             new mapboxgl.Marker(el)
-                .setLngLat(location.coords)
+                .setLngLat(adjustedCoords)
                 .setPopup(new mapboxgl.Popup().setHTML(`<b>${location.name}</b><br>${day}`))
                 .addTo(map);
-            
+
             count++;
         });
     });
