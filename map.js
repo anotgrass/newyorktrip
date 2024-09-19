@@ -78,21 +78,14 @@ map.addControl(
     'top-right'
 );
 
-// Add markers and numbered markers for each day
-Object.keys(locations).forEach(day => {
-    locations[day].forEach((location, index) => {
-        // Create a custom element for the numbered marker
-        const markerEl = document.createElement('div');
-        markerEl.className = 'numbered-marker';
-        markerEl.textContent = index + 1; // Number the markers for each day
-
-        // Create the marker and add it to the map
-        new mapboxgl.Marker(markerEl)
-            .setLngLat(location.coords)
-            .setPopup(new mapboxgl.Popup().setHTML(`<b>${location.name}</b><br>${day}`))
-            .addTo(map);
-    });
-});
+// Function to offset markers if they are too close to each other
+function offsetCoordinates(coords, index, totalMarkers) {
+    const offsetFactor = 0.0001; // Adjust this value to change the offset size
+    const angle = (index / totalMarkers) * 2 * Math.PI;
+    const offsetLng = Math.cos(angle) * offsetFactor;
+    const offsetLat = Math.sin(angle) * offsetFactor;
+    return [coords[0] + offsetLng, coords[1] + offsetLat];
+}
 
 // Remove the call to center on user location during map load
 map.on('load', function () {
@@ -119,6 +112,29 @@ map.on('load', function () {
             ],
             'fill-extrusion-opacity': 0.6
         }
+    });
+
+    // Add markers with numbering, color, and offset for overlapping markers
+    Object.keys(locations).forEach(day => {
+        let count = 1;
+        locations[day].forEach((location, index, array) => {
+            // Offset coordinates if there are multiple markers
+            const adjustedCoords = offsetCoordinates(location.coords, index, array.length);
+
+            // Create the marker element
+            const el = document.createElement('div');
+            el.className = 'numbered-marker';
+            el.style.backgroundColor = location.color; // Set the marker color dynamically
+            el.innerText = count; // Add numbering
+
+            // Create the marker
+            new mapboxgl.Marker(el)
+                .setLngLat(adjustedCoords)
+                .setPopup(new mapboxgl.Popup().setHTML(`<b>${location.name}</b><br>${day}`))
+                .addTo(map);
+
+            count++;
+        });
     });
 
     // Set default light preset
