@@ -1,38 +1,68 @@
+/* Base styles for the geocoder */
 .mapboxgl-ctrl-geocoder {
-    max-width: 400px;
-    width: 100%;
-    font-size: 16px;
-    padding: 0 10px;
-    height: 40px;
-    line-height: 40px;
     display: flex;
     align-items: center;
+    max-width: 100%;
+    padding: 0;
     box-sizing: border-box;
+    font-size: 16px;
+    height: 40px;
+    position: relative;
 }
 
-/* Media query for tablet and mobile screens */
-@media (max-width: 768px) {
+/* Style for input inside the geocoder */
+.mapboxgl-ctrl-geocoder input {
+    font-size: 16px;
+    height: 100%;
+    line-height: 40px;
+    box-sizing: border-box;
+    padding-left: 40px; /* Ensure space for the icon */
+    width: 100%; /* Full width on desktop */
+}
+
+/* Remove the focus outline around the geocoder input */
+.mapboxgl-ctrl-geocoder input:focus {
+    outline: none;
+}
+
+
+/* Style for the geocoder icon */
+.mapboxgl-ctrl-geocoder .mapboxgl-ctrl-geocoder--icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #888;
+}
+
+/* Adjustments for larger screens (desktop) */
+@media (min-width: 768px) {
+    .mapboxgl-ctrl-geocoder input {
+        padding-left: 50px; /* Add more space between the icon and text */
+    }
+    
     .mapboxgl-ctrl-geocoder {
-        width: 50vw;
+        font-size: 18px;
+        width: 100%; /* Full width on desktop */
+    }
+}
+
+/* Adjustments for smaller screens (mobile) */
+@media (max-width: 767px) {
+    .mapboxgl-ctrl-geocoder {
         font-size: 14px;
         height: 35px;
-        line-height: 35px;
+        width: 50%; /* Limit to 50% of container width */
     }
 
     .mapboxgl-ctrl-geocoder input {
-        padding-left: 35px;
-    }
-}
-
-@media (max-width: 480px) {
-    .mapboxgl-ctrl-geocoder {
-        width: 40vw;
-        font-size: 12px;
-        height: 30px;
-        line-height: 30px;
+        padding-left: 40px; /* Keep space for icon */
+        font-size: 14px;
+        width: 100%; /* Full width of the 50% geocoder container */
     }
 
-    .mapboxgl-ctrl-geocoder input {
-        padding-left: 32px;
+    .mapboxgl-ctrl-geocoder .mapboxgl-ctrl-geocoder--icon {
+        font-size: 16px;
     }
 }
