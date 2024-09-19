@@ -7,23 +7,23 @@ const locations = {
         { name: "Rockefeller Center", coords: [-73.9787, 40.7587], color: "green" },
         { name: "Rockefeller Christmas Tree", coords: [-73.9787, 40.7587], color: "green" },
         { name: "Rockefeller Skating Rink", coords: [-73.9787, 40.7587], color: "green" },
-        { name: "Central Park", coords: [-73.9683, 40.7851], color: "green" },
-        { name: "Saks Fifth Avenue", coords: [-73.9742, 40.7602], color: "green" }
+        { name: "Saks Fifth Avenue", coords: [-73.9742, 40.7602], color: "green" },
+        { name: "Central Park", coords: [-73.9683, 40.7851], color: "green" }
     ],
 
     "Friday, December 13": [
-        { name: "9/11 Memorial & Museum", coords: [-74.0134, 40.7115], color: "purple" },
         { name: "Brooklyn Bridge", coords: [-73.9969, 40.7061], color: "purple" },
+        { name: "9/11 Memorial & Museum", coords: [-74.0134, 40.7115], color: "purple" },
         { name: "Ellis Island", coords: [-74.0403, 40.6995], color: "purple" },
         { name: "Liberty Island", coords: [-74.0445, 40.6892], color: "purple" }
     ],
 
     "Saturday, December 14": [
-        { name: "Times Square", coords: [-73.9855, 40.7580], color: "red" },
         { name: "Empire State Building", coords: [-73.9857, 40.7484], color: "red" },
         { name: "Bryant Park", coords: [-73.9832, 40.7536], color: "red" },
         { name: "New York Public Library", coords: [-73.9822, 40.7532], color: "red" },
-        { name: "Marquis Theatre (Elf)", coords: [-73.9864, 40.7590], color: "red" }
+        { name: "Marquis Theatre (Elf)", coords: [-73.9864, 40.7590], color: "red" },
+        { name: "Times Square", coords: [-73.9855, 40.7580], color: "red" }
     ],
 
     "Sunday, December 15": [
