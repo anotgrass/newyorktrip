@@ -44,7 +44,7 @@ body { margin: 0; padding: 0; }
 @media (max-width: 768px) {
     .config-panel {
         width: 60vw; /* Reduce the width for smaller screens */
-        left: 20vw; /* Center the panel horizontally */
+        left: 10px; /* Center the panel horizontally */
         font-size: 14px; /* Scale down font size */
         padding: 10px; /* Adjust padding */
     }
@@ -69,7 +69,7 @@ body { margin: 0; padding: 0; }
 @media (max-width: 480px) {
     .config-panel {
         width: 75vw; /* Reduce the width further on mobile devices */
-        left: 12.5vw; /* Center the panel horizontally */
+        left: 10px; /* Center the panel horizontally */
         font-size: 12px; /* Further reduce font size */
         padding: 8px; /* Adjust padding */
     }
