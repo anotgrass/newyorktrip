@@ -171,3 +171,18 @@ body { margin: 0; padding: 0; }
         line-height: 30px;
     }
 }
+
+.numbered-marker {
+    background-color: #4264fb;
+    color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    border: 2px solid white;
+}
