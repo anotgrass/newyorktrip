@@ -11,7 +11,8 @@ const locations = {
         { name: "Central Park", coords: [-73.9683, 40.7851], color: "green", description: "Spend the afternoon exploring Central Park’s scenic pathways, lakes, and iconic landmarks." },
         { name: "Belvedere Castle", coords: [-73.9692, 40.7794], color: "green", description: "Visit this charming castle in Central Park." },
         { name: "The Mall and Literary Walk", coords: [-73.9722, 40.7726], color: "green", description: "Walk along this picturesque tree-lined walkway." },
-        { name: "Gapstow Bridge", coords: [-73.9731, 40.7688], color: "green", description: "See one of the most iconic bridges in Central Park." }
+        { name: "Gapstow Bridge", coords: [-73.9731, 40.7688], color: "green", description: "See one of the most iconic bridges in Central Park." },
+        { name: "Top of the Rock", coords: [-73.9785, 40.7587], color: "green", description: "Visit the Top of the Rock for breathtaking views of New York City." }
     ],
 
     "Friday, December 13": [
@@ -30,8 +31,7 @@ const locations = {
         { name: "New York Public Library", coords: [-73.9822, 40.7532], color: "red", description: "Visit the historic New York Public Library, one of the city’s most beautiful landmarks." },
         { name: "Macy’s", coords: [-73.9894, 40.7508], color: "red", description: "Shop at the famous Macy’s in Herald Square." },
         { name: "Marquis Theatre (Elf)", coords: [-73.9864, 40.7590], color: "red", description: "Catch a performance of Elf: The Musical at the Marquis Theatre." },
-        { name: "Times Square", coords: [-73.9855, 40.7580], color: "red", description: "End the night with the bright lights and bustling energy of Times Square." },
-        { name: "Top of the Rock", coords: [-73.9785, 40.7587], color: "red", description: "Visit the Top of the Rock for breathtaking views of New York City at night." }
+        { name: "Times Square", coords: [-73.9855, 40.7580], color: "red", description: "End the night with the bright lights and bustling energy of Times Square." }
     ],
 
     "Sunday, December 15": [
