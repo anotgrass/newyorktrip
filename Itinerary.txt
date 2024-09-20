@@ -1,0 +1,91 @@
+Wednesday, December 11
+
+    West New York
+    Coordinates: [-74.0143, 40.7870]
+    Description: Explore West New York, a lovely spot with views of the Hudson River and Manhattan skyline.
+
+Thursday, December 12
+
+    Rockefeller Center
+    Coordinates: [-73.979858, 40.759245]
+    Description: Start your day at Rockefeller Center, an iconic entertainment and shopping complex in the heart of Midtown Manhattan.
+
+    Rockefeller Christmas Tree
+    Coordinates: [-73.9787, 40.7587]
+    Description: Visit the famous Rockefeller Christmas Tree, a must-see during the holiday season.
+
+    Rockefeller Skating Rink
+    Coordinates: [-73.978409, 40.758607]
+    Description: Glide on ice at the Rockefeller Skating Rink, a classic New York winter activity.
+
+    Saks Fifth Avenue
+    Coordinates: [-73.9742, 40.7602]
+    Description: Check out the holiday displays and do some upscale shopping at Saks Fifth Avenue.
+
+    Central Park
+    Coordinates: [-73.9683, 40.7851]
+    Description: Spend the afternoon exploring Central Park’s scenic pathways, lakes, and iconic landmarks.
+
+Friday, December 13
+
+    Brooklyn Bridge
+    Coordinates: [-73.9969, 40.7061]
+    Description: Walk across the historic Brooklyn Bridge and take in stunning views of the city and the harbor.
+
+    9/11 Memorial & Museum
+    Coordinates: [-74.0134, 40.7115]
+    Description: Pay your respects and learn about the history of 9/11 at the Memorial and Museum in Lower Manhattan.
+
+    Ellis Island
+    Coordinates: [-74.0403, 40.6995]
+    Description: Take a ferry ride to Ellis Island and discover the history of immigration to America.
+
+    Liberty Island
+    Coordinates: [-74.0445, 40.6892]
+    Description: Visit the Statue of Liberty, one of the most iconic landmarks in the United States.
+
+Saturday, December 14
+
+    Empire State Building
+    Coordinates: [-73.9857, 40.7484]
+    Description: Head to the top of the Empire State Building for breathtaking panoramic views of the city.
+
+    Bryant Park
+    Coordinates: [-73.9832, 40.7536]
+    Description: Take a stroll through Bryant Park, where you can also visit the Winter Village market.
+
+    New York Public Library
+    Coordinates: [-73.9822, 40.7532]
+    Description: Visit the historic New York Public Library, one of the city’s most beautiful landmarks.
+
+    Marquis Theatre (Elf)
+    Coordinates: [-73.9864, 40.7590]
+    Description: Catch a performance of Elf: The Musical at the Marquis Theatre.
+
+    Times Square
+    Coordinates: [-73.9855, 40.7580]
+    Description: End the night with the bright lights and bustling energy of Times Square.
+
+Sunday, December 15
+
+    Chelsea Market
+    Coordinates: [-74.0061, 40.7425]
+    Description: Start your day with food and shopping at Chelsea Market, a famous indoor marketplace.
+
+    The High Line
+    Coordinates: [-74.0049, 40.7479]
+    Description: Walk along the High Line, an elevated park that offers unique views of the city and the Hudson River.
+
+    Hudson Yards
+    Coordinates: [-74.0017, 40.7546]
+    Description: Explore the new Hudson Yards development, home to luxury shopping, dining, and The Vessel.
+
+    The Edge Observatory
+    Coordinates: [-74.0011, 40.7535]
+    Description: Experience breathtaking views from The Edge, an observation deck with a glass floor suspended 1,100 feet above the ground.
+
+Monday, December 16
+
+    LGA Airport
+    Coordinates: [-73.8726, 40.7769]
+    Description: Conclude your trip by catching your flight at LaGuardia Airport.

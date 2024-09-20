@@ -89,31 +89,9 @@ map.addControl(
 // Remove the call to center on user location during map load
 map.on('load', function () {
 
-    // Add the 3D buildings layer
-    map.addLayer({
-        'id': '3d-buildings',
-        'source': 'composite',
-        'source-layer': 'building',
-        'filter': ['==', 'extrude', 'true'],
-        'type': 'fill-extrusion',
-        'minzoom': 15,
-        'paint': {
-            'fill-extrusion-color': '#aaa',
-            'fill-extrusion-height': [
-                'interpolate', ['linear'], ['zoom'],
-                15, 0,
-                15.05, ['get', 'height']
-            ],
-            'fill-extrusion-base': [
-                'interpolate', ['linear'], ['zoom'],
-                15, 0,
-                15.05, ['get', 'min_height']
-            ],
-            'fill-extrusion-opacity': 0.6
-        }
-    });
-
     // Add markers with zoom functionality
+    let activePopup = null; // Keep track of active popup
+
     Object.keys(locations).forEach(day => {
         let count = 1;
         locations[day].forEach(location => {
@@ -122,18 +100,39 @@ map.on('load', function () {
             el.style.backgroundColor = location.color;
             el.innerText = count;
 
-            // Create a popup for the marker
-            const popup = new mapboxgl.Popup({ closeOnClick: true })
+            // Create a hover tooltip (popup)
+            const hoverTooltip = new mapboxgl.Popup({
+                closeButton: false,
+                closeOnClick: false,
+                offset: 25
+            }).setText(location.name);
+
+            // Create a click popup for the marker
+            const clickPopup = new mapboxgl.Popup({ closeOnClick: true })
                 .setHTML(`<b>${location.name}</b><br>${day}`);
 
             // Create the marker
             const marker = new mapboxgl.Marker(el)
                 .setLngLat(location.coords)
-                .setPopup(popup)
                 .addTo(map);
 
-            // Zoom into the location when a marker is clicked
-            marker.getElement().addEventListener('click', () => {
+            // Show tooltip on hover
+            el.addEventListener('mouseenter', () => {
+                hoverTooltip.setLngLat(location.coords).addTo(map);
+            });
+
+            // Hide tooltip when not hovering
+            el.addEventListener('mouseleave', () => {
+                hoverTooltip.remove();
+            });
+
+            // Zoom into the location and show popup when a marker is clicked
+            el.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent map click event from firing
+                if (activePopup) {
+                    activePopup.remove(); // Close any open popups
+                }
+
                 // Save the current map state before zooming in
                 previousMapState = {
                     center: map.getCenter(),
@@ -149,16 +148,19 @@ map.on('load', function () {
                     bearing: 0,
                     essential: true
                 });
-            });
 
-            // When the popup closes, return to the previous map state
-            popup.on('close', () => {
-                map.flyTo({
-                    center: previousMapState.center,
-                    zoom: previousMapState.zoom,
-                    pitch: previousMapState.pitch,
-                    bearing: previousMapState.bearing,
-                    essential: true
+                // Set the active popup
+                activePopup = clickPopup.setLngLat(location.coords).addTo(map);
+
+                // Restore map state when popup is closed
+                clickPopup.on('close', () => {
+                    map.flyTo({
+                        center: previousMapState.center,
+                        zoom: previousMapState.zoom,
+                        pitch: previousMapState.pitch,
+                        bearing: previousMapState.bearing,
+                        essential: true
+                    });
                 });
             });
 
@@ -166,8 +168,79 @@ map.on('load', function () {
         });
     });
 
-    // Set default light preset
-    setAutoLightPreset();
+    // Close popup if clicking outside of a marker
+    map.on('click', function () {
+        if (activePopup) {
+            activePopup.remove(); // Close the active popup
+            activePopup = null;   // Reset the active popup variable
+
+            // Restore map state after closing popup
+            map.flyTo({
+                center: previousMapState.center,
+                zoom: previousMapState.zoom,
+                pitch: previousMapState.pitch,
+                bearing: previousMapState.bearing,
+                essential: true
+            });
+        }
+    });
+
+    // Event listener for 3D Buildings toggle
+    document.getElementById('toggleBuildings').addEventListener('change', function () {
+        if (this.checked) {
+            map.addLayer({
+                'id': '3d-buildings',
+                'source': 'composite',
+                'source-layer': 'building',
+                'filter': ['==', 'extrude', 'true'],
+                'type': 'fill-extrusion',
+                'minzoom': 15,
+                'paint': {
+                    'fill-extrusion-color': '#aaa',
+                    'fill-extrusion-height': [
+                        'interpolate', ['linear'], ['zoom'],
+                        15, 0,
+                        15.05, ['get', 'height']
+                    ],
+                    'fill-extrusion-base': [
+                        'interpolate', ['linear'], ['zoom'],
+                        15, 0,
+                        15.05, ['get', 'min_height']
+                    ],
+                    'fill-extrusion-opacity': 0.6
+                }
+            });
+        } else {
+            if (map.getLayer('3d-buildings')) {
+                map.removeLayer('3d-buildings');
+            }
+        }
+    });
+
+    // Event listener for Subway System toggle
+    document.getElementById('toggleSubway').addEventListener('change', function () {
+        if (this.checked) {
+            map.addLayer({
+                id: 'subway-lines',
+                type: 'line',
+                source: 'composite',
+                'source-layer': 'transit',
+                filter: ['==', 'class', 'subway'],
+                layout: {
+                    'line-join': 'round',
+                    'line-cap': 'round'
+                },
+                paint: {
+                    'line-color': '#ff3135',  // Subway line color (red for visibility)
+                    'line-width': 2.5
+                }
+            });
+        } else {
+            if (map.getLayer('subway-lines')) {
+                map.removeLayer('subway-lines');
+            }
+        }
+    });
 });
 
 // Toggle config panel
@@ -176,42 +249,9 @@ function toggleConfigPanel() {
     configPanel.style.display = (configPanel.style.display === 'none' || configPanel.style.display === '') ? 'block' : 'none';
 }
 
-// Set light preset based on real time
-function setAutoLightPreset() {
-    const hour = new Date().getHours();
-    let preset = 'day';
-    if (hour >= 5 && hour < 8) {
-        preset = 'dawn';
-    } else if (hour >= 8 && hour < 18) {
-        preset = 'day';
-    } else if (hour >= 18 && hour < 20) {
-        preset = 'dusk';
-    } else {
-        preset = 'night';
-    }
-    map.setConfigProperty('basemap', 'lightPreset', preset);
-}
-
-// Event listener for light preset changes
-document.getElementById('lightPreset').addEventListener('change', function () {
-    const selectedPreset = this.value;
-    if (selectedPreset === 'auto') {
-        setAutoLightPreset();
-    } else {
-        map.setConfigProperty('basemap', 'lightPreset', selectedPreset);
-    }
-});
-
 // Event listener for style changes
 document.getElementById('styleSelect').addEventListener('change', function () {
     map.setStyle(this.value);
-});
-
-// Event listeners for label toggles
-document.querySelectorAll('.map-overlay-inner input[type="checkbox"]').forEach(checkbox => {
-    checkbox.addEventListener('change', function () {
-        map.setConfigProperty('basemap', this.id, this.checked);
-    });
 });
 
 function setMapHeight() {
