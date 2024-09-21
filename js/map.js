@@ -107,9 +107,19 @@ map.on('load', function () {
                 offset: 25
             }).setText(location.name);
 
+            // Conditionally create the website link if it exists
+            const websiteLink = location.website 
+                ? `<a href="${location.website}" target="_blank">Website</a><br><br>` 
+                : '';
+
             // Create a click popup for the marker
             const clickPopup = new mapboxgl.Popup({ closeOnClick: true })
-                .setHTML(`<b>${location.name}</b><br>${day}`);
+                .setHTML(`
+                    <b><center>${location.name}</center></b>
+                    <b>Time:</b> ${location.time}<br><br>
+                    ${websiteLink}
+                    ${location.description}<br>
+                `);
 
             // Create the marker
             const marker = new mapboxgl.Marker(el)
