@@ -23,24 +23,14 @@
     <div id="map"></div>
     
     <!-- Menu Button -->
-    <button class="options-menu-btn" onclick="toggleConfigPanel()">
+    <button class="options-menu-btn" aria-controls="config-panel" aria-expanded="false">
         <span></span>
         <span></span>
         <span></span>
     </button>
     
-    <!-- Legend Button -->
-    <button class="legend-menu-btn" onclick="toggleLegendPanel()">
-        <span>Legend</span>
-    </button>
     
-    <!-- Legend Panel -->
-    <div class="legend-panel" id="legendPanel">
-        <div class="legend-overlay-inner">
-            <h3>Map Legend</h3>
-            <ul id="legendList"></ul>
-        </div>
-    </div>
+    
 
     <!-- Configuration Panel -->
     <div class="config-panel">

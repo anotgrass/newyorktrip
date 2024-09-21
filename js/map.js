@@ -86,38 +86,12 @@ map.addControl(
     'top-right'
 );
 
-// Create the legend panel and hide by default
-const legendPanel = document.createElement('div');
-legendPanel.className = 'legend-panel';
-legendPanel.innerHTML = '<h3>Legend</h3><ul></ul>';
-legendPanel.style.display = 'none'; // Hidden by default
-document.body.appendChild(legendPanel);
-
-// Create a toggle button for the legend
-const legendToggleBtn = document.createElement('button');
-legendToggleBtn.innerText = 'Toggle Legend';
-legendToggleBtn.className = 'legend-toggle-btn';
-document.body.appendChild(legendToggleBtn);
-
-// Toggle the legend panel when the button is clicked
-legendToggleBtn.addEventListener('click', () => {
-    legendPanel.style.display = (legendPanel.style.display === 'none') ? 'block' : 'none';
-});
-
 // Add markers with zoom functionality
 map.on('load', function () {
     let activePopup = null; // Keep track of active popup
 
-    const legendList = document.querySelector('.legend-panel ul'); // Get the legend list
-
     Object.keys(locations).forEach(day => {
         let count = 1;
-
-        // Create a header for each day
-        const dayHeader = document.createElement('li');
-        dayHeader.innerHTML = `<b>${day}</b>`;
-        dayHeader.style.marginTop = '10px';
-        legendList.appendChild(dayHeader);
 
         locations[day].forEach(location => {
             const el = document.createElement('div');
@@ -194,19 +168,6 @@ map.on('load', function () {
                     });
                 });
             });
-
-            // Add legend items with time and location under the day
-            const legendItem = document.createElement('li');
-            legendItem.innerHTML = `<a href="#">${location.time} - ${location.name}</a>`;
-            legendItem.style.color = location.color;
-
-            legendItem.addEventListener('click', (e) => {
-                e.preventDefault();
-                // Simulate marker click on legend item click
-                el.click();
-            });
-
-            legendList.appendChild(legendItem); // Append to legend list
 
             count++;
         });
@@ -292,6 +253,7 @@ document.getElementById('styleSelect').addEventListener('change', function () {
     map.setStyle(this.value);
 });
 
+
 function setMapHeight() {
     const mapElement = document.getElementById('map');
     const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
@@ -302,6 +264,27 @@ function setMapHeight() {
     // Ensure the Mapbox map resizes correctly
     map.resize();
 }
+
+// Toggle config panel visibility
+function toggleConfigPanel() {
+    const configPanel = document.querySelector('.config-panel');
+    const menuButton = document.querySelector('.options-menu-btn');
+    const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
+
+    // Toggle between 'block' and 'none'
+    configPanel.style.display = isExpanded ? 'none' : 'block';
+
+    // Update aria-expanded
+    menuButton.setAttribute('aria-expanded', !isExpanded);
+
+    // Ensure the Mapbox map resizes correctly after panel is toggled
+    map.resize();
+}
+
+
+// Add event listener to the menu button
+document.querySelector('.options-menu-btn').addEventListener('click', toggleConfigPanel);
+
 
 // Set map height on page load, resize, and orientation change
 window.addEventListener('load', setMapHeight);
