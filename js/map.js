@@ -86,13 +86,17 @@ map.addControl(
     'top-right'
 );
 
-// Remove the call to center on user location during map load
-map.on('load', function () {
+// Create the legend panel
+const legendPanel = document.createElement('div');
+legendPanel.className = 'legend-panel';
+legendPanel.innerHTML = '<h3>Legend</h3><ul></ul>';
+document.body.appendChild(legendPanel);
 
-    // Add markers with zoom functionality
+// Add markers with zoom functionality
+map.on('load', function () {
     let activePopup = null; // Keep track of active popup
 
-    const legendList = document.getElementById('legendList'); // Legend list element
+    const legendList = document.querySelector('.legend-panel ul'); // Get the legend list
 
     Object.keys(locations).forEach(day => {
         let count = 1;
@@ -109,17 +113,13 @@ map.on('load', function () {
                 offset: 25
             }).setText(location.name);
 
-            // Conditionally create the website link if it exists
-            const websiteLink = location.website 
-                ? `<a href="${location.website}" target="_blank">Website</a><br><br>` 
-                : '';
-
             // Create a click popup for the marker
             const clickPopup = new mapboxgl.Popup({ closeOnClick: true })
                 .setHTML(`
                     <b><center>${location.name}</center></b>
+                    <b>${day}</b><br> <!-- Added day header here -->
                     <b>Time:</b> ${location.time}<br>
-                    ${websiteLink}
+                    ${location.website ? `<a href="${location.website}" target="_blank">Website</a><br><br>` : ''}
                     ${location.description}<br>
                 `);
 
@@ -176,28 +176,18 @@ map.on('load', function () {
                 });
             });
 
-            // Add each location to the legend list
+            // Add legend items and handle clicks on legend items
             const legendItem = document.createElement('li');
-            legendItem.innerHTML = `${location.name}`;
+            legendItem.innerHTML = `<a href="#">${location.name}</a>`;
             legendItem.style.color = location.color;
-            legendItem.addEventListener('click', () => {
-                if (activePopup) {
-                    activePopup.remove(); // Close any open popups
-                }
 
-                // Fly to the location and open the popup
-                map.flyTo({
-                    center: location.coords,
-                    zoom: 15,
-                    pitch: 45,
-                    bearing: 0,
-                    essential: true
-                });
-
-                activePopup = clickPopup.setLngLat(location.coords).addTo(map);
+            legendItem.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Simulate marker click on legend item click
+                el.click();
             });
 
-            legendList.appendChild(legendItem);
+            legendList.appendChild(legendItem); // Append to legend list
 
             count++;
         });
@@ -277,12 +267,6 @@ map.on('load', function () {
         }
     });
 });
-
-// Toggle legend panel
-function toggleLegendPanel() {
-    const legendPanel = document.getElementById('legendPanel');
-    legendPanel.style.display = (legendPanel.style.display === 'none' || legendPanel.style.display === '') ? 'block' : 'none';
-}
 
 // Toggle config panel
 function toggleConfigPanel() {
