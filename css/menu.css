@@ -154,56 +154,51 @@ input:checked + .slider:before {
     transform: translateX(20px);
 }
 
-/* Style for the legend menu button */
-.legend-menu-btn {
-    position: absolute;
-    top: 10px;
-    left: 70px;
-    background-color: white;
-    border: 1px solid black;
-    padding: 5px;
-    cursor: pointer;
-    z-index: 2;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    border-radius: 4px;
-}
-
-/* Hidden legend panel by default */
+/* Adjust the style of the legend panel */
 .legend-panel {
     position: absolute;
-    top: 50px;
-    left: 70px;
-    background: white;
-    z-index: 1;
-    border-radius: 4px;
-    padding: 15px;
-    font-family: 'Arial', sans-serif;
-    width: 250px;
-    max-width: 30vw;
-    display: none;
+    top: 10px;
+    left: 10px;
+    background-color: white;
+    border: 1px solid black;
+    padding: 10px;
+    z-index: 2;
+    width: 180px;
+    max-height: 85vh; /* Ensure the panel does not extend beyond the viewport */
+    overflow-y: auto; /* Enable scrolling if the content exceeds the panel height */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
 }
 
-/* Media query for smaller screens */
-@media (max-width: 768px) {
-    .legend-panel {
-        width: 70vw;
-    }
-}
-
-.legend-overlay-inner h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-.legend-overlay-inner ul {
-    list-style-type: none;
+/* Style for the legend text */
+.legend-panel ul {
     padding: 0;
+    margin: 0;
+    list-style: none;
 }
 
-.legend-overlay-inner ul li {
-    padding: 8px 0;
+.legend-panel li {
+    font-size: 14px; /* Smaller font size */
+    margin-bottom: 10px;
     cursor: pointer;
-    color: #0073e6;
+}
+
+.legend-panel li a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.legend-panel li a:hover {
     text-decoration: underline;
+    color: #f00;
+}
+
+/* Scroll bar customization (optional) */
+.legend-panel::-webkit-scrollbar {
+    width: 8px;
+}
+
+.legend-panel::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
 }
