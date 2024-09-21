@@ -279,10 +279,10 @@ map.on('load', function () {
 });
 
 // Event listener for Dark/Light Mode toggle with localStorage persistence
-document.getElementById('toggleLightDarkMode').addEventListener('change', function () {
+document.getElementById('darkModeToggle').addEventListener('change', function () {
     const isDark = this.checked;
     applyDarkMode(isDark);
-    localStorage.setItem('darkMode', isDark);
+    localStorage.setItem('darkMode', isDark); // Store the current mode
 });
 
 // Event listener for style changes
