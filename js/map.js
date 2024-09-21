@@ -20,12 +20,6 @@ const map = new mapboxgl.Map({
 let isDarkMode = localStorage.getItem('darkMode') === 'true';
 applyDarkMode(isDarkMode);
 
-// Update the dark mode toggle based on localStorage value
-const darkModeToggle = document.getElementById('darkModeToggle');
-if (darkModeToggle) {
-    darkModeToggle.checked = isDarkMode;  // Ensure the toggle reflects the current mode
-}
-
 // Function to apply dark/light mode styling
 function applyDarkMode(isDark) {
     const elementsToStyle = document.querySelectorAll('.config-panel, .bottom-panel, .panel-icon, .options-menu-btn, .layers-panel, .panel-icon i');
@@ -279,7 +273,7 @@ map.on('load', function () {
 });
 
 // Event listener for Dark/Light Mode toggle with localStorage persistence
-document.getElementById('toggleLightDarkMode').addEventListener('change', function () {
+document.getElementById('darkModeToggle').addEventListener('change', function () {
     const isDark = this.checked;
     applyDarkMode(isDark);
     localStorage.setItem('darkMode', isDark);
