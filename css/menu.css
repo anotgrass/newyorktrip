@@ -168,6 +168,18 @@ input:checked + .slider:before {
     transform: translateX(20px);
 }
 
+/* Dark mode switch styles */
+.dark-mode-switch {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.dark-mode-switch label {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
 /* Media query for tablet and mobile screens */
 @media (max-width: 768px) {
     .config-panel {
@@ -185,16 +197,4 @@ input:checked + .slider:before {
         font-size: 12px;
         padding: 8px;
     }
-}
-
-/* Dark mode switch styles */
-.dark-mode-switch {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-}
-
-.dark-mode-switch label {
-    margin-right: 10px;
-    font-weight: bold;
 }
