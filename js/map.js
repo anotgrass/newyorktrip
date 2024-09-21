@@ -1,5 +1,9 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiYW5vdGdyYXNzIiwiYSI6ImNtMTdjbGg4eTBzcm0yd3B4d3JpZHl4ejIifQ.h3LZQlV7dGoQ-qKNPCLjTA';
 
+// Define Mapbox light and dark style URLs
+const lightStyle = 'mapbox://styles/mapbox/light-v10';
+const darkStyle = 'mapbox://styles/mapbox/dark-v10';
+
 // Define the default zoom level
 const defaultCenter = [-74.0060, 40.7128]; // New York City coordinates
 const defaultZoom = 12;
@@ -7,9 +11,10 @@ const defaultPitch = 60;
 const defaultBearing = -17.6;
 
 // Initialize the map
+let isDarkMode = localStorage.getItem('darkMode') === 'true'; // Retrieve mode from localStorage
 const map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/mapbox/standard',
+    style: isDarkMode ? darkStyle : lightStyle,  // Load map with light or dark mode based on preference
     center: defaultCenter,
     zoom: defaultZoom,
     pitch: defaultPitch,
@@ -248,12 +253,22 @@ map.on('load', function () {
     });
 });
 
+// Event listener for Dark/Light Mode toggle with localStorage persistence
+document.getElementById('toggleLightDarkMode').addEventListener('change', function () {
+    if (this.checked) {
+        map.setStyle(darkStyle); // Switch to dark mode
+        localStorage.setItem('darkMode', 'true');
+    } else {
+        map.setStyle(lightStyle); // Switch to light mode
+        localStorage.setItem('darkMode', 'false');
+    }
+});
+
 // Event listener for style changes
 document.getElementById('styleSelect').addEventListener('change', function () {
     map.setStyle(this.value);
 });
 
-// Set map height on page load, resize, and orientation change
 function setMapHeight() {
     const mapElement = document.getElementById('map');
     const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
@@ -281,17 +296,8 @@ function toggleConfigPanel() {
     map.resize();
 }
 
-// Toggle layers panel visibility
-function toggleLayersPanel() {
-    const layersPanel = document.getElementById('layersPanel');
-    layersPanel.classList.toggle('active');
-}
-
 // Add event listener to the menu button
 document.querySelector('.options-menu-btn').addEventListener('click', toggleConfigPanel);
-
-// Add event listener to the layers button
-document.getElementById('layersBtn').addEventListener('click', toggleLayersPanel);
 
 // Set map height on page load, resize, and orientation change
 window.addEventListener('load', setMapHeight);
