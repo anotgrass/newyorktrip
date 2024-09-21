@@ -314,6 +314,15 @@ function toggleConfigPanel() {
 // Add event listener to the menu button
 document.querySelector('.options-menu-btn').addEventListener('click', toggleConfigPanel);
 
+// Toggle layers panel visibility when clicking the layers button
+function toggleLayersPanel() {
+    const layersPanel = document.getElementById('layersPanel');
+    layersPanel.classList.toggle('active');
+}
+
+// Add event listener to the layers button
+document.getElementById('layersBtn').addEventListener('click', toggleLayersPanel);
+
 // Set map height on page load, resize, and orientation change
 window.addEventListener('load', setMapHeight);
 window.addEventListener('resize', setMapHeight);
