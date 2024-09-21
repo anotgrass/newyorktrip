@@ -16,36 +16,6 @@ const map = new mapboxgl.Map({
     bearing: defaultBearing
 });
 
-// Apply dark mode settings from localStorage
-let isDarkMode = localStorage.getItem('darkMode') === 'true';
-applyDarkMode(isDarkMode);
-
-// Update the dark mode toggle based on localStorage value
-const darkModeToggle = document.getElementById('darkModeToggle');
-if (darkModeToggle) {
-    darkModeToggle.checked = isDarkMode;  // Ensure the toggle reflects the current mode
-}
-
-// Function to apply dark/light mode styling
-function applyDarkMode(isDark) {
-    const elementsToStyle = document.querySelectorAll('.config-panel, .bottom-panel, .panel-icon, .options-menu-btn, .layers-panel, .panel-icon i');
-    const mapContainer = document.getElementById('map');
-
-    if (isDark) {
-        elementsToStyle.forEach(el => {
-            el.style.backgroundColor = '#222';  // Dark background
-            el.style.color = '#fff';  // White text
-        });
-        mapContainer.style.filter = 'brightness(0.8)';
-    } else {
-        elementsToStyle.forEach(el => {
-            el.style.backgroundColor = '#fff';  // Light background
-            el.style.color = '#000';  // Black text
-        });
-        mapContainer.style.filter = 'brightness(1)';
-    }
-}
-
 // Variable to store the previous map state before zooming in
 let previousMapState = {
     center: defaultCenter,
@@ -279,10 +249,10 @@ map.on('load', function () {
 });
 
 // Event listener for Dark/Light Mode toggle with localStorage persistence
-document.getElementById('darkModeToggle').addEventListener('change', function () {
+document.getElementById('toggleLightDarkMode').addEventListener('change', function () {
     const isDark = this.checked;
     applyDarkMode(isDark);
-    localStorage.setItem('darkMode', isDark); // Store the current mode
+    localStorage.setItem('darkMode', isDark);
 });
 
 // Event listener for style changes
@@ -317,29 +287,28 @@ function toggleConfigPanel() {
     map.resize();
 }
 
-// Add event listener to the menu button
-document.querySelector('.options-menu-btn').addEventListener('click', toggleConfigPanel);
-
-// Toggle layers panel visibility when clicking the layers button
+// Toggle layers panel visibility
 function toggleLayersPanel() {
     const layersPanel = document.getElementById('layersPanel');
     layersPanel.classList.toggle('active');
 }
 
-// Disable double-click zoom on buttons and panels
-const elementsToDisableZoom = document.querySelectorAll('.options-menu-btn, .panel-icon, .config-panel, .bottom-panel');
+// Add event listener to the menu button
+document.querySelector('.options-menu-btn').addEventListener('click', toggleConfigPanel);
 
-elementsToDisableZoom.forEach(el => {
-    el.addEventListener('dblclick', function(event) {
-        event.preventDefault();
-        event.stopPropagation(); // Prevent the zoom event
-    });
-});
-
-// Add event listener to the layers button
+// Add event listener to the bottom panel layers button
 document.getElementById('layersBtn').addEventListener('click', toggleLayersPanel);
 
 // Set map height on page load, resize, and orientation change
 window.addEventListener('load', setMapHeight);
 window.addEventListener('resize', setMapHeight);
 window.addEventListener('orientationchange', setMapHeight);
+
+// Disable double-click zoom on buttons and panels
+const elementsToDisableZoom = document.querySelectorAll('.options-menu-btn, .panel-icon, .config-panel, .bottom-panel, .mapboxgl-ctrl, .mapboxgl-ctrl-geolocate, .mapboxgl-ctrl-navigation');
+elementsToDisableZoom.forEach(el => {
+    el.addEventListener('dblclick', function(event) {
+        event.preventDefault();
+        event.stopPropagation(); // Prevent the zoom event
+    });
+});
