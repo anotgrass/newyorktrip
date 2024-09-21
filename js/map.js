@@ -116,8 +116,8 @@ map.on('load', function () {
             const clickPopup = new mapboxgl.Popup({ closeOnClick: true })
                 .setHTML(`
                     <b><center>${location.name}</center></b>
-                    <b>Time:</b> ${location.time}<br><br>
-                    ${websiteLink}
+                    <b>Time:</b> ${location.time}<br>
+                    ${websiteLink}<br>
                     ${location.description}<br>
                 `);
 
