@@ -92,6 +92,8 @@ map.on('load', function () {
     // Add markers with zoom functionality
     let activePopup = null; // Keep track of active popup
 
+    const legendList = document.getElementById('legendList'); // Legend list element
+
     Object.keys(locations).forEach(day => {
         let count = 1;
         locations[day].forEach(location => {
@@ -117,7 +119,7 @@ map.on('load', function () {
                 .setHTML(`
                     <b><center>${location.name}</center></b>
                     <b>Time:</b> ${location.time}<br>
-                    ${websiteLink}<br>
+                    ${websiteLink}
                     ${location.description}<br>
                 `);
 
@@ -173,6 +175,29 @@ map.on('load', function () {
                     });
                 });
             });
+
+            // Add each location to the legend list
+            const legendItem = document.createElement('li');
+            legendItem.innerHTML = `${location.name}`;
+            legendItem.style.color = location.color;
+            legendItem.addEventListener('click', () => {
+                if (activePopup) {
+                    activePopup.remove(); // Close any open popups
+                }
+
+                // Fly to the location and open the popup
+                map.flyTo({
+                    center: location.coords,
+                    zoom: 15,
+                    pitch: 45,
+                    bearing: 0,
+                    essential: true
+                });
+
+                activePopup = clickPopup.setLngLat(location.coords).addTo(map);
+            });
+
+            legendList.appendChild(legendItem);
 
             count++;
         });
@@ -252,6 +277,12 @@ map.on('load', function () {
         }
     });
 });
+
+// Toggle legend panel
+function toggleLegendPanel() {
+    const legendPanel = document.getElementById('legendPanel');
+    legendPanel.style.display = (legendPanel.style.display === 'none' || legendPanel.style.display === '') ? 'block' : 'none';
+}
 
 // Toggle config panel
 function toggleConfigPanel() {
