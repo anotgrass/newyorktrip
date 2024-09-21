@@ -153,3 +153,57 @@ input:checked + .slider {
 input:checked + .slider:before {
     transform: translateX(20px);
 }
+
+/* Style for the legend menu button */
+.legend-menu-btn {
+    position: absolute;
+    top: 10px;
+    left: 70px;
+    background-color: white;
+    border: 1px solid black;
+    padding: 5px;
+    cursor: pointer;
+    z-index: 2;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+/* Hidden legend panel by default */
+.legend-panel {
+    position: absolute;
+    top: 50px;
+    left: 70px;
+    background: white;
+    z-index: 1;
+    border-radius: 4px;
+    padding: 15px;
+    font-family: 'Arial', sans-serif;
+    width: 250px;
+    max-width: 30vw;
+    display: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .legend-panel {
+        width: 70vw;
+    }
+}
+
+.legend-overlay-inner h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.legend-overlay-inner ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.legend-overlay-inner ul li {
+    padding: 8px 0;
+    cursor: pointer;
+    color: #0073e6;
+    text-decoration: underline;
+}
