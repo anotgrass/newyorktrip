@@ -326,6 +326,16 @@ function toggleLayersPanel() {
     layersPanel.classList.toggle('active');
 }
 
+// Disable double-click zoom on buttons and panels
+const elementsToDisableZoom = document.querySelectorAll('.options-menu-btn, .panel-icon, .config-panel, .bottom-panel');
+
+elementsToDisableZoom.forEach(el => {
+    el.addEventListener('dblclick', function(event) {
+        event.preventDefault();
+        event.stopPropagation(); // Prevent the zoom event
+    });
+});
+
 // Add event listener to the layers button
 document.getElementById('layersBtn').addEventListener('click', toggleLayersPanel);
 
