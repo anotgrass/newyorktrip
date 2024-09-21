@@ -86,39 +86,61 @@ map.addControl(
     'top-right'
 );
 
-// Create the legend panel and hide by default
-const legendPanel = document.createElement('div');
-legendPanel.className = 'legend-panel';
-legendPanel.innerHTML = '<h3>Legend</h3><ul></ul>';
-legendPanel.style.display = 'none'; // Hidden by default
-document.body.appendChild(legendPanel);
+// Toggle legend panel visibility
+function toggleLegendPanel() {
+    const legendPanel = document.querySelector('.legend-panel');
+    legendPanel.style.display = (legendPanel.style.display === 'none' || legendPanel.style.display === '') ? 'block' : 'none';
+}
 
-// Create a toggle button for the legend
-const legendToggleBtn = document.createElement('button');
-legendToggleBtn.innerText = 'Toggle Legend';
-legendToggleBtn.className = 'legend-toggle-btn';
-document.body.appendChild(legendToggleBtn);
+// Function to generate the legend panel content dynamically
+function createLegend() {
+    const legendPanel = document.querySelector('.legend-panel');
+    legendPanel.innerHTML = '<h3>Map Legend</h3>';
 
-// Toggle the legend panel when the button is clicked
-legendToggleBtn.addEventListener('click', () => {
-    legendPanel.style.display = (legendPanel.style.display === 'none') ? 'block' : 'none';
-});
+    Object.keys(locations).forEach(date => {
+        // Add the date as a header
+        const dateHeader = document.createElement('h4');
+        dateHeader.textContent = date;
+        legendPanel.appendChild(dateHeader);
 
-// Add markers with zoom functionality
+        locations[date].forEach(location => {
+            const locationLink = document.createElement('a');
+            locationLink.href = '#';
+            locationLink.textContent = `${location.time} - ${location.name}`;
+            locationLink.onclick = () => {
+                // Zoom to location when clicked
+                map.flyTo({
+                    center: location.coords,
+                    zoom: 15,
+                    pitch: 45,
+                    bearing: 0,
+                    essential: true
+                });
+
+                // Create a popup for the location
+                const popup = new mapboxgl.Popup({ closeOnClick: true })
+                    .setLngLat(location.coords)
+                    .setHTML(`<b>${location.name}</b><br>${date} ${location.time}<br><a href="${location.website}" target="_blank">Website</a><br>${location.description}`)
+                    .addTo(map);
+
+                popup.on('close', () => {
+                    // Reset map state after popup closes if necessary
+                });
+            };
+            legendPanel.appendChild(locationLink);
+        });
+    });
+}
+
+// Create legend content on map load
 map.on('load', function () {
+    createLegend();
+    
+    // Add markers with zoom functionality
     let activePopup = null; // Keep track of active popup
-
-    const legendList = document.querySelector('.legend-panel ul'); // Get the legend list
 
     Object.keys(locations).forEach(day => {
         let count = 1;
-
-        // Create a header for each day
-        const dayHeader = document.createElement('li');
-        dayHeader.innerHTML = `<b>${day}</b>`;
-        dayHeader.style.marginTop = '10px';
-        legendList.appendChild(dayHeader);
-
         locations[day].forEach(location => {
             const el = document.createElement('div');
             el.className = 'numbered-marker';
@@ -136,9 +158,9 @@ map.on('load', function () {
             const clickPopup = new mapboxgl.Popup({ closeOnClick: true })
                 .setHTML(`
                     <b><center>${location.name}</center></b>
-                    <b>${day}</b><br>
+                    <b>Date:</b> ${day}<br>
                     <b>Time:</b> ${location.time}<br>
-                    ${location.website ? `<a href="${location.website}" target="_blank">Website</a><br><br>` : ''}
+                    <a href="${location.website}" target="_blank">Website</a><br><br>
                     ${location.description}<br>
                 `);
 
@@ -194,19 +216,6 @@ map.on('load', function () {
                     });
                 });
             });
-
-            // Add legend items with time and location under the day
-            const legendItem = document.createElement('li');
-            legendItem.innerHTML = `<a href="#">${location.time} - ${location.name}</a>`;
-            legendItem.style.color = location.color;
-
-            legendItem.addEventListener('click', (e) => {
-                e.preventDefault();
-                // Simulate marker click on legend item click
-                el.click();
-            });
-
-            legendList.appendChild(legendItem); // Append to legend list
 
             count++;
         });
@@ -287,11 +296,7 @@ map.on('load', function () {
     });
 });
 
-// Event listener for style changes
-document.getElementById('styleSelect').addEventListener('change', function () {
-    map.setStyle(this.value);
-});
-
+// Set map height based on viewport
 function setMapHeight() {
     const mapElement = document.getElementById('map');
     const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
