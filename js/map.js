@@ -86,11 +86,23 @@ map.addControl(
     'top-right'
 );
 
-// Create the legend panel
+// Create the legend panel and hide by default
 const legendPanel = document.createElement('div');
 legendPanel.className = 'legend-panel';
 legendPanel.innerHTML = '<h3>Legend</h3><ul></ul>';
+legendPanel.style.display = 'none'; // Hidden by default
 document.body.appendChild(legendPanel);
+
+// Create a toggle button for the legend
+const legendToggleBtn = document.createElement('button');
+legendToggleBtn.innerText = 'Toggle Legend';
+legendToggleBtn.className = 'legend-toggle-btn';
+document.body.appendChild(legendToggleBtn);
+
+// Toggle the legend panel when the button is clicked
+legendToggleBtn.addEventListener('click', () => {
+    legendPanel.style.display = (legendPanel.style.display === 'none') ? 'block' : 'none';
+});
 
 // Add markers with zoom functionality
 map.on('load', function () {
@@ -100,6 +112,13 @@ map.on('load', function () {
 
     Object.keys(locations).forEach(day => {
         let count = 1;
+
+        // Create a header for each day
+        const dayHeader = document.createElement('li');
+        dayHeader.innerHTML = `<b>${day}</b>`;
+        dayHeader.style.marginTop = '10px';
+        legendList.appendChild(dayHeader);
+
         locations[day].forEach(location => {
             const el = document.createElement('div');
             el.className = 'numbered-marker';
@@ -117,7 +136,7 @@ map.on('load', function () {
             const clickPopup = new mapboxgl.Popup({ closeOnClick: true })
                 .setHTML(`
                     <b><center>${location.name}</center></b>
-                    <b>${day}</b><br> <!-- Added day header here -->
+                    <b>${day}</b><br>
                     <b>Time:</b> ${location.time}<br>
                     ${location.website ? `<a href="${location.website}" target="_blank">Website</a><br><br>` : ''}
                     ${location.description}<br>
@@ -176,9 +195,9 @@ map.on('load', function () {
                 });
             });
 
-            // Add legend items and handle clicks on legend items
+            // Add legend items with time and location under the day
             const legendItem = document.createElement('li');
-            legendItem.innerHTML = `<a href="#">${location.name}</a>`;
+            legendItem.innerHTML = `<a href="#">${location.time} - ${location.name}</a>`;
             legendItem.style.color = location.color;
 
             legendItem.addEventListener('click', (e) => {
@@ -267,12 +286,6 @@ map.on('load', function () {
         }
     });
 });
-
-// Toggle config panel
-function toggleConfigPanel() {
-    const configPanel = document.querySelector('.config-panel');
-    configPanel.style.display = (configPanel.style.display === 'none' || configPanel.style.display === '') ? 'block' : 'none';
-}
 
 // Event listener for style changes
 document.getElementById('styleSelect').addEventListener('change', function () {
