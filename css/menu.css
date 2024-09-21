@@ -154,51 +154,67 @@ input:checked + .slider:before {
     transform: translateX(20px);
 }
 
-/* Adjust the style of the legend panel */
-.legend-panel {
+/* Style for legend toggle button */
+.legend-toggle-btn {
     position: absolute;
-    top: 10px;
+    bottom: 10px;
     left: 10px;
     background-color: white;
     border: 1px solid black;
-    padding: 10px;
+    padding: 5px;
+    cursor: pointer;
     z-index: 2;
-    width: 180px;
-    max-height: 85vh; /* Ensure the panel does not extend beyond the viewport */
-    overflow-y: auto; /* Enable scrolling if the content exceeds the panel height */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     border-radius: 4px;
 }
 
-/* Style for the legend text */
-.legend-panel ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-}
-
-.legend-panel li {
-    font-size: 14px; /* Smaller font size */
-    margin-bottom: 10px;
-    cursor: pointer;
-}
-
-.legend-panel li a {
-    text-decoration: none;
-    color: inherit;
-}
-
-.legend-panel li a:hover {
-    text-decoration: underline;
-    color: #f00;
-}
-
-/* Scroll bar customization (optional) */
-.legend-panel::-webkit-scrollbar {
-    width: 8px;
-}
-
-.legend-panel::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.3);
+/* Hidden legend panel by default */
+.legend-panel {
+    display: none; /* Hide initially */
+    position: absolute;
+    top: 50px;
+    left: 10px;
+    background: white;
+    z-index: 1;
     border-radius: 4px;
+    padding: 15px;
+    font-family: 'Arial', sans-serif;
+    width: 280px;
+    max-width: 40vw;
+    max-height: 70vh; /* Limit height */
+    overflow-y: auto; /* Enable scrolling */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Style adjustments for panel content */
+.legend-panel h3 {
+    font-size: 1.1em;
+    margin: 0;
+    padding: 5px 0;
+}
+
+.legend-panel a {
+    text-decoration: none;
+    color: green;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.legend-panel a:hover {
+    text-decoration: underline;
+    color: darkgreen;
+}
+
+@media (max-width: 768px) {
+    .legend-panel {
+        width: 60vw;
+        left: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .legend-panel {
+        width: 75vw;
+        left: 10px;
+    }
 }
