@@ -12,6 +12,13 @@
     border-radius: 4px;
 }
 
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+
 /* Options menu icon lines, shrunk by 50% */
 .options-menu-btn span {
     display: block;
@@ -37,64 +44,49 @@
     box-shadow: none;
 }
 
-/* Media query for tablet and mobile screens */
-@media (max-width: 768px) {
-    .config-panel {
-        width: 60vw;
-        left: 10px;
-        font-size: 14px;
-        padding: 10px;
-    }
-}
-
-@media (max-width: 480px) {
-    .config-panel {
-        width: 75vw;
-        left: 10px;
-        font-size: 12px;
-        padding: 8px;
-    }
-}
-
-/* Styles for the form inside the panel */
-.map-overlay-inner fieldset {
-    display: block;
-    justify-content: space-between;
+/* Bottom panel with center icons */
+.bottom-panel {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    z-index: 3;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Icons inside the bottom panel */
+.panel-icon {
+    background: none;
     border: none;
-    padding: 0;
+    margin: 0 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
 }
 
-.map-overlay-inner label {
-    font-weight: normal;
-    margin-right: 10px;
+/* Styles for the layers panel that opens on click */
+.layers-panel {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 4;
+    display: none;
+    width: 250px;
 }
 
-.map-overlay-inner input[type="checkbox"] {
-    margin: 0;
-    width: auto;
-}
-
-.select-fieldset,
-.fieldset-style {
+/* Show layers panel when active */
+.layers-panel.active {
     display: block;
-    margin-bottom: 10px;
-}
-
-.select-fieldset label,
-.fieldset-style label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-/* Style adjustments for dropdowns */
-.select-fieldset select,
-.fieldset-style select {
-    width: auto;
-    box-sizing: border-box;
-    padding: 5px;
 }
 
 /* Toggle switch styles */
@@ -152,4 +144,23 @@ input:checked + .slider {
 
 input:checked + .slider:before {
     transform: translateX(20px);
+}
+
+/* Media query for tablet and mobile screens */
+@media (max-width: 768px) {
+    .config-panel {
+        width: 60vw;
+        left: 10px;
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .config-panel {
+        width: 75vw;
+        left: 10px;
+        font-size: 12px;
+        padding: 8px;
+    }
 }

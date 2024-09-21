@@ -253,7 +253,7 @@ document.getElementById('styleSelect').addEventListener('change', function () {
     map.setStyle(this.value);
 });
 
-
+// Set map height on page load, resize, and orientation change
 function setMapHeight() {
     const mapElement = document.getElementById('map');
     const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
@@ -281,10 +281,17 @@ function toggleConfigPanel() {
     map.resize();
 }
 
+// Toggle layers panel visibility
+function toggleLayersPanel() {
+    const layersPanel = document.getElementById('layersPanel');
+    layersPanel.classList.toggle('active');
+}
 
 // Add event listener to the menu button
 document.querySelector('.options-menu-btn').addEventListener('click', toggleConfigPanel);
 
+// Add event listener to the layers button
+document.getElementById('layersBtn').addEventListener('click', toggleLayersPanel);
 
 // Set map height on page load, resize, and orientation change
 window.addEventListener('load', setMapHeight);

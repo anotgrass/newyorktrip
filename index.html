@@ -28,9 +28,6 @@
         <span></span>
         <span></span>
     </button>
-    
-    
-    
 
     <!-- Configuration Panel -->
     <div class="config-panel">
@@ -44,24 +41,34 @@
                     <option value="mapbox://styles/mapbox/outdoors-v11">Outdoors</option>
                 </select>
             </fieldset>
+        </div>
+    </div>
 
-            <!-- Toggle Switch for 3D Buildings -->
-            <div class="toggle-switch">
-                <label for="toggleBuildings">3D Buildings</label>
-                <label class="switch">
-                    <input type="checkbox" id="toggleBuildings">
-                    <span class="slider"></span>
-                </label>
-            </div>
+    <!-- Bottom Panel -->
+    <div class="bottom-panel">
+        <button id="layersBtn" class="panel-icon">
+            <i class="fas fa-layer-group"></i>
+        </button>
+    </div>
 
-            <!-- Toggle Switch for Subway System -->
-            <div class="toggle-switch">
-                <label for="toggleSubway">Subway System</label>
-                <label class="switch">
-                    <input type="checkbox" id="toggleSubway">
-                    <span class="slider"></span>
-                </label>
-            </div>
+    <!-- Layers Panel (Initially Hidden) -->
+    <div id="layersPanel" class="layers-panel hidden">
+        <!-- Toggle Switch for 3D Buildings -->
+        <div class="toggle-switch">
+            <label for="toggleBuildings">3D Buildings</label>
+            <label class="switch">
+                <input type="checkbox" id="toggleBuildings">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <!-- Toggle Switch for Subway System -->
+        <div class="toggle-switch">
+            <label for="toggleSubway">Subway System</label>
+            <label class="switch">
+                <input type="checkbox" id="toggleSubway">
+                <span class="slider"></span>
+            </label>
         </div>
     </div>
 
