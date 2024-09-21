@@ -18,7 +18,6 @@ fieldset {
     margin: 0;
 }
 
-
 /* Options menu icon lines, shrunk by 50% */
 .options-menu-btn span {
     display: block;
@@ -44,6 +43,12 @@ fieldset {
     box-shadow: none;
 }
 
+/* Dark mode for config panel */
+.config-panel.dark-mode {
+    background-color: #222;
+    color: #fff;
+}
+
 /* Bottom panel with center icons */
 .bottom-panel {
     position: absolute;
@@ -60,6 +65,12 @@ fieldset {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
+/* Dark mode for bottom panel */
+.bottom-panel.dark-mode {
+    background-color: #222;
+    color: #fff;
+}
+
 /* Icons inside the bottom panel */
 .panel-icon {
     background: none;
@@ -67,6 +78,11 @@ fieldset {
     margin: 0 15px;
     font-size: 1.5rem;
     cursor: pointer;
+}
+
+/* Dark mode for panel icons */
+.panel-icon.dark-mode {
+    color: #fff;
 }
 
 /* Styles for the layers panel that opens on click */
@@ -82,6 +98,12 @@ fieldset {
     z-index: 4;
     display: none;
     width: 250px;
+}
+
+/* Dark mode for layers panel */
+.layers-panel.dark-mode {
+    background-color: #222;
+    color: #fff;
 }
 
 /* Show layers panel when active */
@@ -163,4 +185,16 @@ input:checked + .slider:before {
         font-size: 12px;
         padding: 8px;
     }
+}
+
+/* Dark mode switch styles */
+.dark-mode-switch {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.dark-mode-switch label {
+    margin-right: 10px;
+    font-weight: bold;
 }
