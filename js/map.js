@@ -1,9 +1,5 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiYW5vdGdyYXNzIiwiYSI6ImNtMTdjbGg4eTBzcm0yd3B4d3JpZHl4ejIifQ.h3LZQlV7dGoQ-qKNPCLjTA';
 
-// Define Mapbox light and dark style URLs
-const lightStyle = 'mapbox://styles/mapbox/light-v10';
-const darkStyle = 'mapbox://styles/mapbox/dark-v10';
-
 // Define the default zoom level
 const defaultCenter = [-74.0060, 40.7128]; // New York City coordinates
 const defaultZoom = 12;
@@ -11,15 +7,38 @@ const defaultPitch = 60;
 const defaultBearing = -17.6;
 
 // Initialize the map
-let isDarkMode = localStorage.getItem('darkMode') === 'true'; // Retrieve mode from localStorage
 const map = new mapboxgl.Map({
     container: 'map',
-    style: isDarkMode ? darkStyle : lightStyle,  // Load map with light or dark mode based on preference
+    style: 'mapbox://styles/mapbox/standard',
     center: defaultCenter,
     zoom: defaultZoom,
     pitch: defaultPitch,
     bearing: defaultBearing
 });
+
+// Apply dark mode settings from localStorage
+let isDarkMode = localStorage.getItem('darkMode') === 'true';
+applyDarkMode(isDarkMode);
+
+// Function to apply dark/light mode styling
+function applyDarkMode(isDark) {
+    const elementsToStyle = document.querySelectorAll('.config-panel, .bottom-panel, .panel-icon, .options-menu-btn, .layers-panel, .panel-icon i');
+    const mapContainer = document.getElementById('map');
+
+    if (isDark) {
+        elementsToStyle.forEach(el => {
+            el.style.backgroundColor = '#222';  // Dark background
+            el.style.color = '#fff';  // White text
+        });
+        mapContainer.style.filter = 'brightness(0.8)';
+    } else {
+        elementsToStyle.forEach(el => {
+            el.style.backgroundColor = '#fff';  // Light background
+            el.style.color = '#000';  // Black text
+        });
+        mapContainer.style.filter = 'brightness(1)';
+    }
+}
 
 // Variable to store the previous map state before zooming in
 let previousMapState = {
@@ -255,13 +274,9 @@ map.on('load', function () {
 
 // Event listener for Dark/Light Mode toggle with localStorage persistence
 document.getElementById('toggleLightDarkMode').addEventListener('change', function () {
-    if (this.checked) {
-        map.setStyle(darkStyle); // Switch to dark mode
-        localStorage.setItem('darkMode', 'true');
-    } else {
-        map.setStyle(lightStyle); // Switch to light mode
-        localStorage.setItem('darkMode', 'false');
-    }
+    const isDark = this.checked;
+    applyDarkMode(isDark);
+    localStorage.setItem('darkMode', isDark);
 });
 
 // Event listener for style changes
