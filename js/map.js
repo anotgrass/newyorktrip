@@ -116,92 +116,120 @@ map.addControl(
     'top-right'
 );
 
-// Add markers with zoom functionality
+// Load and display the grouped locations from the GeoJSON file
 map.on('load', function () {
     let activePopup = null; // Keep track of active popup
 
-    Object.keys(locations).forEach(day => {
-        let count = 1;
+    fetch('./data/nyc-my-trip.geojson?nocache=' + new Date().getTime())
+        .then(response => response.json())
+        .then(data => {
+            const groupedLocations = {};
 
-        locations[day].forEach(location => {
-            const el = document.createElement('div');
-            el.className = 'numbered-marker';
-            el.style.backgroundColor = location.color;
-            el.innerText = count;
-
-            // Create a hover tooltip (popup)
-            const hoverTooltip = new mapboxgl.Popup({
-                closeButton: false,
-                closeOnClick: false,
-                offset: 25
-            }).setText(location.name);
-
-            // Create a click popup for the marker
-            const clickPopup = new mapboxgl.Popup({ closeOnClick: true })
-                .setHTML(`
-                    <b><center>${location.name}</center></b>
-                    <b>${day}</b><br>
-                    <b>Time:</b> ${location.time}<br>
-                    ${location.website ? `<a href="${location.website}" target="_blank">Website</a><br><br>` : ''}
-                    ${location.description}<br>
-                `);
-
-            // Create the marker
-            const marker = new mapboxgl.Marker(el)
-                .setLngLat(location.coords)
-                .addTo(map);
-
-            // Show tooltip on hover
-            el.addEventListener('mouseenter', () => {
-                hoverTooltip.setLngLat(location.coords).addTo(map);
-            });
-
-            // Hide tooltip when not hovering
-            el.addEventListener('mouseleave', () => {
-                hoverTooltip.remove();
-            });
-
-            // Zoom into the location and show popup when a marker is clicked
-            el.addEventListener('click', (e) => {
-                e.stopPropagation(); // Prevent map click event from firing
-                if (activePopup) {
-                    activePopup.remove(); // Close any open popups
+            // Group the locations by date
+            data.features.forEach(feature => {
+                const date = feature.properties.date;
+                if (!groupedLocations[date]) {
+                    groupedLocations[date] = [];
                 }
+                groupedLocations[date].push(feature);
+            });
 
-                // Save the current map state before zooming in
-                previousMapState = {
-                    center: map.getCenter(),
-                    zoom: map.getZoom(),
-                    pitch: map.getPitch(),
-                    bearing: map.getBearing()
-                };
+            // Add markers to the map for each date group
+            Object.keys(groupedLocations).forEach((date) => {
+                const locations = groupedLocations[date]; // Locations for the current date group
 
-                map.flyTo({
-                    center: location.coords,
-                    zoom: 15,
-                    pitch: 45,
-                    bearing: 0,
-                    essential: true
-                });
+                locations.forEach((feature, count) => {
+                    const coords = feature.geometry.coordinates;
+                    const props = feature.properties;
 
-                // Set the active popup
-                activePopup = clickPopup.setLngLat(location.coords).addTo(map);
+                    // Create a marker element
+                    const el = document.createElement('div');
+                    el.className = 'numbered-marker';
+                    el.style.backgroundColor = props.color || '#4264fb';
 
-                // Restore map state when popup is closed
-                clickPopup.on('close', () => {
-                    map.flyTo({
-                        center: previousMapState.center,
-                        zoom: previousMapState.zoom,
-                        pitch: previousMapState.pitch,
-                        bearing: previousMapState.bearing,
-                        essential: true
+                    // Check if there are multiple locations in the group
+                    if (locations.length > 1) {
+                        // Set the marker to use letters A, B, C, etc.
+                        el.innerText = String.fromCharCode(65 + count); // 'A' = 65 in ASCII
+                    } else {
+                        // No letter for single-location groups
+                        el.innerText = ''; 
+                    }
+
+                    // Create a hover tooltip (popup)
+                    const hoverTooltip = new mapboxgl.Popup({
+                        closeButton: false,
+                        closeOnClick: false,
+                        offset: 25
+                    }).setText(props.name);
+
+                    // Create a click popup for the marker
+                    const clickPopup = new mapboxgl.Popup({ closeOnClick: true })
+                        .setHTML(`
+                            <b><center>${props.name}</center></b>
+                            <b>${props.date}</b><br>
+                            <b>Time:</b> ${props.time}<br>
+                            ${props.website ? `<a href="${props.website}" target="_blank">Website</a><br><br>` : ''}
+                            ${props.description}
+                        `);
+
+                    // Add the marker to the map
+                    const marker = new mapboxgl.Marker(el)
+                        .setLngLat(coords)
+                        .addTo(map);
+
+                    // Show tooltip on hover
+                    el.addEventListener('mouseenter', () => {
+                        hoverTooltip.setLngLat(coords).addTo(map);
+                    });
+
+                    // Hide tooltip when not hovering
+                    el.addEventListener('mouseleave', () => {
+                        hoverTooltip.remove();
+                    });
+
+                    // Zoom into the location and show popup when a marker is clicked
+                    el.addEventListener('click', (e) => {
+                        e.stopPropagation(); // Prevent map click event from firing
+                        if (activePopup) {
+                            activePopup.remove(); // Close any open popups
+                        }
+
+                        // Save the current map state before zooming in
+                        previousMapState = {
+                            center: map.getCenter(),
+                            zoom: map.getZoom(),
+                            pitch: map.getPitch(),
+                            bearing: map.getBearing()
+                        };
+
+                        map.flyTo({
+                            center: coords,
+                            zoom: 15,
+                            pitch: 45,
+                            bearing: 0,
+                            essential: true
+                        });
+
+                        // Set the active popup
+                        activePopup = clickPopup.setLngLat(coords).addTo(map);
+
+                        // Restore map state when popup is closed
+                        clickPopup.on('close', () => {
+                            map.flyTo({
+                                center: previousMapState.center,
+                                zoom: previousMapState.zoom,
+                                pitch: previousMapState.pitch,
+                                bearing: previousMapState.bearing,
+                                essential: true
+                            });
+                        });
                     });
                 });
             });
+        })
+        .catch(err => console.error('Error loading GeoJSON:', err));
 
-            count++;
-        });
-    });
 
     // Close popup if clicking outside of a marker
     map.on('click', function () {
@@ -229,6 +257,7 @@ map.on('load', function () {
                 'source-layer': 'building',
                 'filter': ['==', 'extrude', 'true'],
                 'type': 'fill-extrusion',
+                'slot': 'top',
                 'minzoom': 15,
                 'paint': {
                     'fill-extrusion-color': '#aaa',
@@ -260,6 +289,7 @@ map.on('load', function () {
                 type: 'line',
                 source: 'composite',
                 'source-layer': 'transit',
+                'slot': 'middle',
                 filter: ['==', 'class', 'subway'],
                 layout: {
                     'line-join': 'round',
@@ -276,6 +306,97 @@ map.on('load', function () {
             }
         }
     });
+
+    // Load the Central Park points layer from a GeoJSON file
+    document.getElementById('toggleCentralPark').addEventListener('change', function () {
+        if (this.checked) {
+            if (!map.getSource('central-park-points')) {  // Check if the source doesn't already exist
+                map.addSource('central-park-points', {
+                    type: 'geojson',
+                    data: './data/nyc-centralpark.geojson?nocache=' + new Date().getTime()  // Path to your GeoJSON file with cache-busting
+                });
+            }
+
+            if (!map.getLayer('central-park-points-layer')) {  // Check if the layer doesn't already exist
+                map.addLayer({
+                    id: 'central-park-points-layer',
+                    type: 'circle',
+                    source: 'central-park-points',
+                    paint: {
+                        'circle-radius': 6,
+                        'circle-color': '#007cbf',  // Customize the color of the points
+                        'circle-stroke-width': 1,
+                        'circle-stroke-color': '#fff'  // White outline for better visibility
+                    }
+                });
+
+                let hoverTooltip = null;
+
+                // Add hover functionality to Central Park points
+                map.on('mouseenter', 'central-park-points-layer', function (e) {
+                    // Change the cursor to a pointer when hovering over a point
+                    map.getCanvas().style.cursor = 'pointer';
+
+                    // Get coordinates and properties of the feature
+                    const coords = e.features[0].geometry.coordinates.slice();
+                    const props = e.features[0].properties;
+
+                    // If a previous tooltip exists, remove it
+                    if (hoverTooltip) hoverTooltip.remove();
+
+                    // Create and show hover tooltip
+                    hoverTooltip = new mapboxgl.Popup({
+                        closeButton: false,
+                        closeOnClick: false,
+                        offset: 25
+                    })
+                    .setLngLat(coords)
+                    .setText(props.name)  // Display the name from the GeoJSON
+                    .addTo(map);
+                });
+
+                // Remove the hover tooltip when the mouse leaves the point
+                map.on('mouseleave', 'central-park-points-layer', function () {
+                    map.getCanvas().style.cursor = '';  // Change cursor back to default
+                    if (hoverTooltip) {
+                        hoverTooltip.remove();  // Close the hover tooltip
+                        hoverTooltip = null;  // Clear the reference to the popup
+                    }
+                });
+
+                // Click event to display popup with more details
+                map.on('click', 'central-park-points-layer', function (e) {
+                    const coords = e.features[0].geometry.coordinates.slice();
+                    const props = e.features[0].properties;
+
+                    const clickPopup = new mapboxgl.Popup({ closeOnClick: true })
+                        .setLngLat(coords)
+                        .setHTML(`
+                            <b><center>${props.name}</center></b>
+                            <b>Description:</b> ${props.description || 'N/A'}<br>
+                        `)
+                        .addTo(map);
+
+                    // Fly to the point when clicked
+                    map.flyTo({
+                        center: coords,
+                        zoom: 15,
+                        pitch: 45,
+                        bearing: 0,
+                        essential: true
+                    });
+                });
+            }
+        } else {
+            if (map.getLayer('central-park-points-layer')) {
+                map.removeLayer('central-park-points-layer');
+            }
+            if (map.getSource('central-park-points')) {
+                map.removeSource('central-park-points');
+            }
+        }
+    });
+
 });
 
 // Event listener for Dark/Light Mode toggle with localStorage persistence

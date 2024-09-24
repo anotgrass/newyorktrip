@@ -1,0 +1,135 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+      {
+          "type": "Feature",
+          "properties": {
+              "name": "Start/End",
+              "time": "11:30 AM",
+              "description": "Start the Central Park Route",
+              "color": "#FF0000"
+          },
+          "geometry": {
+              "type": "Point",
+              "coordinates": [-73.9788, 40.7671]
+          }
+      },
+      {
+          "type": "Feature",
+          "properties": {
+              "name": "Tavern On the Green",
+              "time": "12:00 PM",
+              "description": "Lunch stop",
+              "color": "#FF0000"
+          },
+          "geometry": {
+              "type": "Point",
+              "coordinates": [-73.9818, 40.7712]
+          }
+      },
+      {
+          "type": "Feature",
+          "properties": {
+              "name": "Strawberry Fields",
+              "time": "1:00 PM",
+              "description": "Iconic spot",
+              "color": "#FF0000"
+          },
+          "geometry": {
+              "type": "Point",
+              "coordinates": [-73.9727, 40.7759]
+          }
+      },
+      {
+          "type": "Feature",
+          "properties": {
+              "name": "Belvedere Castle",
+              "time": "2:00 PM",
+              "description": "A visit to the castle",
+              "color": "#FF0000"
+          },
+          "geometry": {
+              "type": "Point",
+              "coordinates": [-73.9692, 40.7794]
+          }
+      },
+      {
+          "type": "Feature",
+          "properties": {
+              "name": "Alice in Wonderland",
+              "time": "2:30 PM",
+              "description": "Alice Statue visit",
+              "color": "#FF0000"
+          },
+          "geometry": {
+              "type": "Point",
+              "coordinates": [-73.9680, 40.7746]
+          }
+      },
+      {
+          "type": "Feature",
+          "properties": {
+              "name": "Bethesda Terrace",
+              "time": "3:00 PM",
+              "description": "Famous terrace",
+              "color": "#FF0000"
+          },
+          "geometry": {
+              "type": "Point",
+              "coordinates": [-73.9695, 40.7740]
+          }
+      },
+      {
+          "type": "Feature",
+          "properties": {
+              "name": "Cherry Hill",
+              "time": "3:30 PM",
+              "description": "Visit Cherry Hill",
+              "color": "#FF0000"
+          },
+          "geometry": {
+              "type": "Point",
+              "coordinates": [-73.9754, 40.7731]
+          }
+      },
+      {
+          "type": "Feature",
+          "properties": {
+              "name": "The Mall and Literary Walk",
+              "time": "3:45 PM",
+              "description": "Walk along the Literary Walk",
+              "color": "#FF0000"
+          },
+          "geometry": {
+              "type": "Point",
+              "coordinates": [-73.9722, 40.7726]
+          }
+      },
+      {
+          "type": "Feature",
+          "properties": {
+              "name": "Balto Statue",
+              "time": "3:50 PM",
+              "description": "Balto Statue visit",
+              "color": "#FF0000"
+          },
+          "geometry": {
+              "type": "Point",
+              "coordinates": [-73.9749, 40.7709]
+          }
+      },
+      {
+          "type": "Feature",
+          "properties": {
+              "name": "Gapstow Bridge",
+              "time": "4:00 PM",
+              "description": "End of Central Park tour",
+              "color": "#FF0000"
+          },
+          "geometry": {
+              "type": "Point",
+              "coordinates": [-73.9731, 40.7688]
+          }
+      }
+  ]
+}
