@@ -21,7 +21,7 @@
       "properties": {
         "name": "Rockefeller Center",
         "color": "green",
-        "description": "Start your day at Rockefeller Center, an iconic entertainment and shopping complex in Midtown.",
+        "description": "Start your day at Rockefeller Center, an iconic entertainment and shopping complex in Midtown. Duration: 2 hours.",
         "time": "7:00 AM",
         "website": "",
         "date": "Thursday, December 12"
@@ -34,40 +34,10 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Rockefeller Christmas Tree",
-        "color": "green",
-        "description": "Visit the famous Rockefeller Christmas Tree, a must-see during the holiday season.",
-        "time": "9:00 AM",
-        "website": "",
-        "date": "Thursday, December 12"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-73.9787, 40.7587]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "Rockefeller Skating Rink",
-        "color": "green",
-        "description": "Glide on ice at the Rockefeller Skating Rink, a classic New York winter activity.",
-        "time": "9:30 AM",
-        "website": "",
-        "date": "Thursday, December 12"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-73.978409, 40.758607]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "name": "Saks Fifth Avenue",
         "color": "green",
-        "description": "Check out the holiday displays and upscale shopping at Saks Fifth Avenue.",
-        "time": "10:30 AM",
+        "description": "Check out the holiday displays and upscale shopping at Saks Fifth Avenue. Duration: 1 hour 5 minutes.",
+        "time": "9:15 AM",
         "website": "",
         "date": "Thursday, December 12"
       },
@@ -81,8 +51,8 @@
       "properties": {
         "name": "Central Park",
         "color": "green",
-        "description": "Explore Central Park’s scenic pathways, lakes, and iconic landmarks.",
-        "time": "12:00 PM",
+        "description": "Explore Central Park’s scenic pathways, lakes, and iconic landmarks. Duration: 4 hours 15 minutes.",
+        "time": "11:30 AM",
         "website": "",
         "date": "Thursday, December 12"
       },
@@ -96,7 +66,7 @@
       "properties": {
         "name": "Radio City Music Hall (Rockettes)",
         "color": "green",
-        "description": "Watch the Rockettes at Radio City Music Hall.",
+        "description": "Watch the Rockettes at Radio City Music Hall. Duration: 1.5 hours 15 minutes.",
         "time": "5:00 PM",
         "website": "",
         "date": "Thursday, December 12"
@@ -111,7 +81,7 @@
       "properties": {
         "name": "Top of the Rock",
         "color": "green",
-        "description": "Visit the Top of the Rock for breathtaking views of New York City at night.",
+        "description": "Visit the Top of the Rock for breathtaking views of New York City at night. Duration: 1 hour 2 minutes.",
         "time": "7:00 PM",
         "website": "https://www.topoftherocknyc.com",
         "date": "Thursday, December 12"
@@ -124,9 +94,24 @@
     {
       "type": "Feature",
       "properties": {
+        "name": "Times Square",
+        "color": "green",
+        "description": "End the night with the bright lights and bustling energy of Times Square. Duration: 1 hour 10 minutes.",
+        "time": "8:30 PM",
+        "website": "",
+        "date": "Thursday, December 12"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-73.9855, 40.7580]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "name": "Brooklyn Bridge",
         "color": "purple",
-        "description": "Walk across the historic Brooklyn Bridge and take in stunning views of the city and the harbor.",
+        "description": "Walk across the historic Brooklyn Bridge and take in stunning views of the city and the harbor. Duration: 1.5 hours.",
         "time": "8:00 AM",
         "website": "",
         "date": "Friday, December 13"
@@ -139,16 +124,16 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "9/11 Memorial & Museum",
+        "name": "Dumbo - Manhattan Bridge View",
         "color": "purple",
-        "description": "Pay your respects and learn about the history of 9/11 at the Memorial and Museum in Lower Manhattan.",
-        "time": "9:30 AM",
-        "website": "https://www.911memorial.org",
+        "description": "Scenic view of the Manhattan Bridge from Dumbo. Duration: 30 minutes 15 minutes.",
+        "time": "10:00 AM",
+        "website": "",
         "date": "Friday, December 13"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-74.0134, 40.7115]
+        "coordinates": [-73.9867, 40.7033]
       }
     },
     {
@@ -156,8 +141,8 @@
       "properties": {
         "name": "Ellis Island",
         "color": "purple",
-        "description": "Take a ferry ride to Ellis Island and discover the history of immigration to America.",
-        "time": "12:00 PM",
+        "description": "Take a ferry ride to Ellis Island and discover the history of immigration to America. Duration: 2 hours 30 minutes.",
+        "time": "11:00 AM",
         "website": "",
         "date": "Friday, December 13"
       },
@@ -171,7 +156,7 @@
       "properties": {
         "name": "Statue of Liberty",
         "color": "purple",
-        "description": "Visit the Statue of Liberty, one of the most iconic landmarks in the United States.",
+        "description": "Visit the Statue of Liberty, one of the most iconic landmarks in the United States. Duration: 2 hours 30 minutes.",
         "time": "2:00 PM",
         "website": "https://www.cityexperiences.com/new-york/city-cruises/statue/",
         "date": "Friday, December 13"
@@ -186,7 +171,7 @@
       "properties": {
         "name": "Charging Bull",
         "color": "purple",
-        "description": "Visit the famous Charging Bull statue on Wall Street.",
+        "description": "Visit the famous Charging Bull statue on Wall Street. Duration: 15 minutes.",
         "time": "4:00 PM",
         "website": "",
         "date": "Friday, December 13"
@@ -201,7 +186,7 @@
       "properties": {
         "name": "Wall Street",
         "color": "purple",
-        "description": "Take a stroll down Wall Street, the financial hub of the U.S.",
+        "description": "Take a stroll down Wall Street, the financial hub of the U.S. Duration: 30 minutes 5 minutes.",
         "time": "4:30 PM",
         "website": "",
         "date": "Friday, December 13"
@@ -216,7 +201,7 @@
       "properties": {
         "name": "Federal Hall",
         "color": "purple",
-        "description": "Visit Federal Hall, a historic building where George Washington was inaugurated.",
+        "description": "Visit Federal Hall, a historic building where George Washington was inaugurated. Duration: 30 minutes 3 minutes.",
         "time": "5:00 PM",
         "website": "",
         "date": "Friday, December 13"
@@ -229,9 +214,24 @@
     {
       "type": "Feature",
       "properties": {
+        "name": "9/11 Memorial & Museum",
+        "color": "purple",
+        "description": "Pay your respects and learn about the history of 9/11 at the Memorial and Museum in Lower Manhattan. Duration: 2 hours.",
+        "time": "6:00 PM",
+        "website": "https://www.911memorial.org",
+        "date": "Friday, December 13"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-74.0134, 40.7115]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "name": "Empire State Building",
         "color": "red",
-        "description": "Head to the top of the Empire State Building for breathtaking panoramic views of the city.",
+        "description": "Head to the top of the Empire State Building for breathtaking panoramic views of the city. Duration: 2 hours 15 minutes.",
         "time": "8:00 AM",
         "website": "https://ticketing.esbnyc.com/webstore/Shop/ViewItems.aspx?CG=Tickets&C=Express",
         "date": "Saturday, December 14"
@@ -246,7 +246,7 @@
       "properties": {
         "name": "Bryant Park",
         "color": "red",
-        "description": "Take a stroll through Bryant Park, where you can also visit the Winter Village market.",
+        "description": "Take a stroll through Bryant Park, where you can also visit the Winter Village market. Duration: 1 hour 10 minutes.",
         "time": "10:00 AM",
         "website": "",
         "date": "Saturday, December 14"
@@ -261,7 +261,7 @@
       "properties": {
         "name": "New York Public Library",
         "color": "red",
-        "description": "Visit the historic New York Public Library, one of the city’s most beautiful landmarks.",
+        "description": "Visit the historic New York Public Library, one of the city’s most beautiful landmarks. Duration: 1 hour 2 minutes.",
         "time": "11:00 AM",
         "website": "",
         "date": "Saturday, December 14"
@@ -274,10 +274,25 @@
     {
       "type": "Feature",
       "properties": {
+        "name": "Grand Central Station",
+        "color": "red",
+        "description": "Visit the iconic Grand Central Terminal with its famous celestial ceiling. Duration: 1 hour 10 minutes.",
+        "time": "12:00 PM",
+        "website": "",
+        "date": "Saturday, December 14"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-73.9772, 40.7527]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "name": "Macy’s",
         "color": "red",
-        "description": "Shop at the famous Macy’s in Herald Square.",
-        "time": "12:30 PM",
+        "description": "Shop at the famous Macy’s in Herald Square. Duration: 1 hour 15 minutes.",
+        "time": "1:30 PM",
         "website": "",
         "date": "Saturday, December 14"
       },
@@ -289,24 +304,9 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Times Square",
-        "color": "red",
-        "description": "End the night with the bright lights and bustling energy of Times Square.",
-        "time": "5:00 PM",
-        "website": "",
-        "date": "Saturday, December 14"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-73.9855, 40.7580]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "name": "Marquis Theatre (Elf)",
         "color": "red",
-        "description": "Catch a performance of Elf: The Musical at the Marquis Theatre.",
+        "description": "Catch a performance of Elf: The Musical at the Marquis Theatre. Duration: 2 hours 5 minutes.",
         "time": "7:00 PM",
         "website": "",
         "date": "Saturday, December 14"
@@ -319,9 +319,39 @@
     {
       "type": "Feature",
       "properties": {
+        "name": "Rockefeller Christmas Tree",
+        "color": "red",
+        "description": "Visit the famous Rockefeller Christmas Tree, a must-see during the holiday season. Duration: 30 minutes 2 minutes.",
+        "time": "9:00 PM",
+        "website": "",
+        "date": "Saturday, December 14"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-73.9787, 40.7587]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Rockefeller Skating Rink",
+        "color": "red",
+        "description": "Glide on ice at the Rockefeller Skating Rink, a classic New York winter activity. Duration: 1 hour 1 minute.",
+        "time": "9:30 PM",
+        "website": "",
+        "date": "Saturday, December 14"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-73.978409, 40.758607]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "name": "Chelsea Market",
         "color": "orange",
-        "description": "Start your day with food and shopping at Chelsea Market, a famous indoor marketplace.",
+        "description": "Start your day with food and shopping at Chelsea Market, a famous indoor marketplace. Duration: 1.5 hours.",
         "time": "9:00 AM",
         "website": "",
         "date": "Sunday, December 15"
@@ -336,7 +366,7 @@
       "properties": {
         "name": "The High Line",
         "color": "orange",
-        "description": "Walk along the High Line, an elevated park that offers unique views of the city and the Hudson River.",
+        "description": "Walk along the High Line, an elevated park that offers unique views of the city and the Hudson River. Duration: 1 hour 10 minutes.",
         "time": "10:30 AM",
         "website": "",
         "date": "Sunday, December 15"
@@ -351,7 +381,7 @@
       "properties": {
         "name": "Hudson Yards",
         "color": "orange",
-        "description": "Explore the new Hudson Yards development, home to luxury shopping, dining, and The Vessel.",
+        "description": "Explore the new Hudson Yards development, home to luxury shopping, dining, and The Vessel. Duration: 1 hour 10 minutes.",
         "time": "12:00 PM",
         "website": "https://www.hudsonyardsnewyork.com",
         "date": "Sunday, December 15"
@@ -366,7 +396,7 @@
       "properties": {
         "name": "The Edge Observatory",
         "color": "orange",
-        "description": "Experience breathtaking views from The Edge, an observation deck with a glass floor suspended 1,100 feet above the ground.",
+        "description": "Experience breathtaking views from The Edge, an observation deck with a glass floor suspended 1,100 feet above the ground. Duration: 1 hour 5 minutes.",
         "time": "2:00 PM",
         "website": "",
         "date": "Sunday, December 15"
@@ -381,7 +411,7 @@
       "properties": {
         "name": "Little Italy",
         "color": "orange",
-        "description": "Explore Little Italy and enjoy some authentic Italian cuisine.",
+        "description": "Explore Little Italy and enjoy some authentic Italian cuisine. Duration: 1 hour 25 minutes.",
         "time": "3:30 PM",
         "website": "",
         "date": "Sunday, December 15"
@@ -396,7 +426,7 @@
       "properties": {
         "name": "Chinatown",
         "color": "orange",
-        "description": "Visit Chinatown for unique shops and delicious Chinese food.",
+        "description": "Visit Chinatown for unique shops and delicious Chinese food. Duration: 1.5 hours 10 minutes.",
         "time": "5:00 PM",
         "website": "",
         "date": "Sunday, December 15"
@@ -411,7 +441,7 @@
       "properties": {
         "name": "Aire Ancient Baths",
         "color": "orange",
-        "description": "Relax and unwind at the Aire Ancient Baths spa.",
+        "description": "Relax and unwind at the Aire Ancient Baths spa. Duration: 2 hours 10 minutes.",
         "time": "6:30 PM",
         "website": "https://beaire.com/en/aire-ancient-baths-new-york/",
         "date": "Sunday, December 15"
@@ -426,7 +456,7 @@
       "properties": {
         "name": "LGA Airport",
         "color": "black",
-        "description": "Conclude your trip by catching your flight at LaGuardia Airport.",
+        "description": "Conclude your trip by catching your flight at LaGuardia Airport. Duration: 20 minutes (taxi).",
         "time": "10:00 AM",
         "website": "",
         "date": "Monday, December 16"
