@@ -13,7 +13,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-74.0143, 40.7870]
+        "coordinates": [-74.01339, 40.78746]
       }
     },
     {
@@ -34,25 +34,10 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Saks Fifth Avenue",
-        "color": "green",
-        "description": "Check out the holiday displays and upscale shopping at Saks Fifth Avenue. Duration: 1 hour. Walking Time: 5 minutes.",
-        "time": "9:15 AM",
-        "website": "",
-        "date": "Thursday, December 12"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-73.9742, 40.7602]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "name": "Central Park",
         "color": "green",
         "description": "Explore Central Park’s scenic pathways, lakes, and iconic landmarks. Duration: 4 hours. Walking Time: 15 minutes.",
-        "time": "11:30 AM",
+        "time": "9:30 AM",
         "website": "",
         "date": "Thursday, December 12"
       },
@@ -64,9 +49,54 @@
     {
       "type": "Feature",
       "properties": {
+        "name": "Roller Rabbit",
+        "color": "green",
+        "description": "Roller Rabbit Shopping. Walking Time: 10 minutes.",
+        "time": "10:30 AM",
+        "website": "",
+        "date": "Thursday, December 12"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-73.9593, 40.7806]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "SKIMS NYC Flagship",
+        "color": "green",
+        "description": "SKIMS NYC Flagship. Walking Time: 25 minutes.",
+        "time": "12:00 AM",
+        "website": "",
+        "date": "Thursday, December 12"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-73.9761, 40.7594]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Saks Fifth Avenue",
+        "color": "green",
+        "description": "Check out the holiday displays and upscale shopping at Saks Fifth Avenue. Duration: 1 hour. Walking Time: 5 minutes.",
+        "time": "1:30 PM",
+        "website": "",
+        "date": "Thursday, December 12"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-73.9742, 40.7602]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "name": "Radio City Music Hall (Rockettes)",
         "color": "green",
-        "description": "Watch the Rockettes at Radio City Music Hall. Duration: 1.5 hours. Walking Time: 15 minutes.",
+        "description": "Watch the Rockettes at Radio City Music Hall. Duration: 1.5 hours. Walking Time: 10 minutes.",
         "time": "5:00 PM",
         "website": "",
         "date": "Thursday, December 12"
@@ -126,8 +156,8 @@
       "properties": {
         "name": "Brooklyn Bridge",
         "color": "purple",
-        "description": "Walk across the historic Brooklyn Bridge and take in stunning views of the city and harbor. Duration: 1.5 hours.",
-        "time": "7:00 AM",
+        "description": "Walk across the historic Brooklyn Bridge and take in stunning views of the city and harbor. Duration: 1.5 hours. Take Ferry from Imperial > Pier 11.",
+        "time": "8:00 AM",
         "website": "",
         "date": "Friday, December 13"
       },
@@ -142,7 +172,7 @@
         "name": "Dumbo - Manhattan Bridge View",
         "color": "purple",
         "description": "Scenic view of the Manhattan Bridge from Dumbo. Duration: 30 minutes. Walking Time: 15 minutes.",
-        "time": "8:30 AM",
+        "time": "10:00 AM",
         "website": "",
         "date": "Friday, December 13"
       },
@@ -156,8 +186,8 @@
       "properties": {
         "name": "Statue of Liberty",
         "color": "purple",
-        "description": "Visit the Statue of Liberty, one of the most iconic landmarks in the United States. Duration: 2 hours. Walking Time: 30 minutes.",
-        "time": "11:00 AM",
+        "description": "Visit the Statue of Liberty, one of the most iconic landmarks in the United States. Duration: 3 hours. Walking Time: 30 minutes.",
+        "time": "1:00 PM",
         "website": "https://www.cityexperiences.com/new-york/city-cruises/statue/",
         "date": "Friday, December 13"
       },
@@ -171,8 +201,8 @@
       "properties": {
         "name": "Charging Bull",
         "color": "purple",
-        "description": "Visit the famous Charging Bull statue on Wall Street. Duration: 15 minutes. Walking Time: 10 minutes.",
-        "time": "1:30 PM",
+        "description": "Visit the famous Charging Bull statue on Wall Street. Duration: 15 minutes. Walking Time: 20 minutes.",
+        "time": "4:30 PM",
         "website": "",
         "date": "Friday, December 13"
       },
@@ -184,40 +214,10 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "9/11 Memorial & Museum",
-        "color": "purple",
-        "description": "Pay your respects and learn about the history of 9/11 at the Memorial and Museum. Duration: 2 hours. Walking Time: 5 minutes.",
-        "time": "2:00 PM",
-        "website": "https://www.911memorial.org",
-        "date": "Friday, December 13"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-74.0134, 40.7115]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "The Oculus",
-        "color": "purple",
-        "description": "Shop the latest trends at iconic brand names and discover new stores in the Oculus. Walking Time: 5 minutes.",
-        "time": "4:30 PM",
-        "website": "https://www.officialworldtradecenter.com/en/local/things-to-do.html",
-        "date": "Friday, December 13"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-74.0119, 40.7115]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "name": "Wall Street",
         "color": "purple",
-        "description": "Take a stroll down Wall Street, the financial hub of the U.S. Duration: 30 minutes. Walking Time: 10 minutes.",
-        "time": "7:30 PM",
+        "description": "Take a stroll down Wall Street, the financial hub of the U.S. Duration: 30 minutes. Walking Time: 5 minutes.",
+        "time": "4:45 PM",
         "website": "",
         "date": "Friday, December 13"
       },
@@ -232,13 +232,43 @@
         "name": "Federal Hall",
         "color": "purple",
         "description": "Visit Federal Hall, a historic building where George Washington was inaugurated. Duration: 30 minutes. Walking Time: 5 minutes.",
-        "time": "8:00 PM",
+        "time": "5:00 PM",
         "website": "",
         "date": "Friday, December 13"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [-74.0103, 40.7079]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "9/11 Memorial & Museum",
+        "color": "purple",
+        "description": "Pay your respects and learn about the history of 9/11 at the Memorial and Museum. Duration: 2 hours. Walking Time: 5 minutes.",
+        "time": "5:00 PM",
+        "website": "https://www.911memorial.org",
+        "date": "Friday, December 13"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-74.0134, 40.7115]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "The Oculus",
+        "color": "purple",
+        "description": "Shop the latest trends at iconic brand names and discover new stores in the Oculus. Walking Time: 5 minutes.",
+        "time": "7:30 PM",
+        "website": "",
+        "date": "Friday, December 13"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-74.0119, 40.7115]
       }
     },
     {
@@ -289,6 +319,21 @@
     {
       "type": "Feature",
       "properties": {
+        "name": "Alo (Shopping)",
+        "color": "orange",
+        "description": "Alo clothes shopping. Duration: 1 hour. Walking Time: 5 minutes.",
+        "time": "1:00 PM",
+        "website": "",
+        "date": "Saturday, December 14"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-74.0001, 40.7539]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "name": "The Edge Observatory",
         "color": "orange",
         "description": "Experience breathtaking views from The Edge, an observation deck with a glass floor. Duration: 1 hour. Walking Time: 5 minutes.",
@@ -306,7 +351,7 @@
       "properties": {
         "name": "Little Italy",
         "color": "orange",
-        "description": "Explore Little Italy and enjoy authentic Italian cuisine. Duration: 1 hour. Walking Time: 15 minutes.",
+        "description": "Explore Little Italy and enjoy authentic Italian cuisine. Duration: 1 hour. Walking Time: 20 minutes.",
         "time": "5:30 PM",
         "website": "",
         "date": "Saturday, December 14"
@@ -321,7 +366,7 @@
       "properties": {
         "name": "Chinatown",
         "color": "orange",
-        "description": "Visit Chinatown for unique shops and delicious Chinese food. Duration: 1.5 hours. Walking Time: 10 minutes.",
+        "description": "Visit Chinatown for unique shops and delicious Chinese food. Duration: 1.5 hours. Walking Time: 5 minutes.",
         "time": "6:00 PM",
         "website": "",
         "date": "Saturday, December 14"
@@ -336,8 +381,8 @@
       "properties": {
         "name": "Aire Ancient Baths",
         "color": "orange",
-        "description": "Relax and unwind at the Aire Ancient Baths spa in Tribeca. Duration: 2 hours. Walking Time: 15 minutes.",
-        "time": "7:00 PM",
+        "description": "Relax and unwind at the Aire Ancient Baths spa in Tribeca. Duration: 1 hour. Walking Time: 15 minutes.",
+        "time": "10:00 PM",
         "website": "https://beaire.com/en/aire-ancient-baths-new-york/",
         "date": "Saturday, December 14"
       },
@@ -345,35 +390,21 @@
         "type": "Point",
         "coordinates": [-74.0067, 40.7176]
       }
-    },
+    },    
+
     {
       "type": "Feature",
       "properties": {
         "name": "Empire State Building",
         "color": "red",
-        "description": "Head to the top of the Empire State Building for breathtaking panoramic views. Duration: 2 hours. Walking Time: 15 minutes.",
-        "time": "8:00 AM",
-        "website": "https://ticketing.esbnyc.com/webstore/Shop/ViewItems.aspx?CG=Tickets&C=Express",
-        "date": "Sunday, December 15"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-73.9857, 40.7484]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "Bryant Park",
-        "color": "red",
-        "description": "Take a stroll through Bryant Park, where you can also visit the Winter Village market. Duration: 1 hour. Walking Time: 10 minutes.",
-        "time": "10:00 AM",
+        "description": "Head to the top of the Empire State Building for breathtaking panoramic views. Duration: 2 hours.",
+        "time": "9:00 AM",
         "website": "",
         "date": "Sunday, December 15"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-73.9832, 40.7536]
+        "coordinates": [-73.9857, 40.7484]
       }
     },
     {
@@ -396,7 +427,7 @@
       "properties": {
         "name": "Grand Central Station",
         "color": "red",
-        "description": "Visit the iconic Grand Central Terminal. Duration: 1 hour. Walking Time: 10 minutes.",
+        "description": "Visit the iconic Grand Central Terminal. Duration: 1 hour. Walking Time: 5 minutes.",
         "time": "12:00 PM",
         "website": "",
         "date": "Sunday, December 15"
@@ -424,10 +455,40 @@
     {
       "type": "Feature",
       "properties": {
+        "name": "Bryant Park",
+        "color": "red",
+        "description": "Take a stroll through Bryant Park, where you can also visit the Winter Village market. Duration: 1 hour. Walking Time: 10 minutes.",
+        "time": "4:00 PM",
+        "website": "",
+        "date": "Sunday, December 15"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-73.9832, 40.7536]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Marquis Theatre (Elf)",
+        "color": "red",
+        "description": "Elf: The Musical! Duration: 2.5 hours. Walking Time: 5 minutes.",
+        "time": "7:00 PM",
+        "website": "",
+        "date": "Sunday, December 15"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-73.9864, 40.7590]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "name": "Times Square",
         "color": "red",
-        "description": "End the night with the bright lights and bustling energy of Times Square. Duration: 1 hour. Walking Time: 15 minutes.",
-        "time": "4:00 PM",
+        "description": "End the night with the bright lights and bustling energy of Times Square. Duration: 1 hour. Walking Time: 10 minutes.",
+        "time": "9:30 PM",
         "website": "",
         "date": "Sunday, December 15"
       },
@@ -439,24 +500,9 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Marquis Theatre (Elf)",
-        "color": "red",
-        "description": "Catch a performance of Elf: The Musical at the Marquis Theatre. Duration: 2 hours. Walking Time: 5 minutes.",
-        "time": "7:00 PM",
-        "website": "https://elfonbroadway.com/",
-        "date": "Sunday, December 15"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-73.9864, 40.7590]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "name": "LGA Airport",
         "color": "black",
-        "description": "Conclude your trip by catching your flight at LaGuardia Airport. Duration: 20 minutes (taxi).",
+        "description": "Conclude your trip by catching your flight at LaGuardia Airport. Duration: 45 minutes to 1 hour (Uber/Lyft).",
         "time": "10:00 AM",
         "website": "",
         "date": "Monday, December 16"
@@ -465,6 +511,6 @@
         "type": "Point",
         "coordinates": [-73.8726, 40.7769]
       }
-    }
+    }    
   ]
 }
